@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { newLessonKeys } from "@/content/changelog";
 import type { Level } from "@/content/types";
 import { Icon } from "./Icon";
 import { useProgress } from "./progress";
@@ -19,7 +20,10 @@ export function LessonList({ level }: { level: Level }) {
                 {done ? <Icon name="check" size={16} /> : String(i + 1).padStart(2, "0")}
               </span>
               <span className="lesson-body">
-                <span className="lesson-title">{lesson.title}</span>
+                <span className="lesson-title">
+                  {lesson.title}
+                  {!done && newLessonKeys.has(`${level.id}/${lesson.slug}`) && <span className="badge-new">New</span>}
+                </span>
                 <span className="lesson-summary">{lesson.summary}</span>
                 <span className="lesson-meta">
                   {lesson.minutes} min · {quizzes} quick check{quizzes === 1 ? "" : "s"}

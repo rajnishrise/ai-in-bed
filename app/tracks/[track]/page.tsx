@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
+import { SaveOffline } from "@/components/Offline";
 import { TrackPath } from "@/components/TrackPath";
 import { getTrack, trackLessons, tracks } from "@/content/tracks";
 import { SITE_NAME, absoluteUrl } from "@/lib/site";
@@ -64,6 +65,7 @@ export default async function TrackPage({ params }: { params: Promise<Params> })
           minutes: s.lesson.minutes,
         }))}
       />
+      <SaveOffline id={`track-${t.id}`} label="this track" urls={[`/tracks/${t.id}`, ...steps.map((s) => s.href)]} />
     </div>
   );
 }

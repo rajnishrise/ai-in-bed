@@ -1,4 +1,5 @@
 import { beginnerMore } from "./beginner-more";
+import { beginnerNew } from "./beginner-new";
 import type { Level } from "./types";
 
 export const beginner: Level = {
@@ -671,5 +672,6 @@ export const beginner: Level = {
       ],
     },
     ...beginnerMore,
+    ...beginnerNew,
   ],
 };

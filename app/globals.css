@@ -2594,3 +2594,65 @@ strong {
   border-radius: 16px;
   border: 1px solid var(--line);
 }
+
+/* ---------- Round three: offline, install, contribute, what's new ---------- */
+.offline-save {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 28px 0 8px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+}
+.offline-save > svg { color: var(--gold); flex: none; }
+.offline-save > div { flex: 1; min-width: 0; }
+.offline-save strong { display: block; font-weight: 600; }
+.offline-save p { margin: 2px 0 0; font-size: 0.9rem; }
+.offline-save .btn { flex: none; }
+.footer-brand .btn { margin-top: 12px; }
+.saved-pages { text-align: left; margin: 24px auto 28px; max-width: 420px; }
+.saved-pages h2 { font-size: 1.1rem; margin-bottom: 8px; }
+.saved-pages ul { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+.saved-pages li { border-bottom: 1px solid var(--line); }
+.saved-pages a { display: block; padding: 10px 2px; color: var(--ink); text-decoration: none; }
+.saved-pages a:hover { color: var(--gold); }
+.suggest-edit { margin: 18px 0 0; font-size: 0.9rem; text-align: center; }
+.suggest-edit a { color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+.suggest-edit a:hover { color: var(--gold); }
+.badge-new {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: 3px;
+  font-family: var(--font-body);
+  line-height: 1.5;
+  white-space: nowrap;
+  color: var(--bg);
+  background: var(--gold);
+}
+.release { padding: 28px 0; border-top: 1px solid var(--line); }
+.release:first-of-type { border-top: 0; }
+.release time { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.release h2 { margin: 6px 0 10px; }
+.release ul { margin: 0 0 12px; padding-left: 1.2em; }
+.release li { margin: 4px 0; }
+.release .release-lessons { list-style: none; padding: 0; display: grid; gap: 8px; margin-top: 14px; }
+.release .release-lessons a {
+  display: flex; gap: 10px; align-items: baseline;
+  padding: 10px 14px; border: 1px solid var(--line); border-radius: 12px;
+  color: var(--ink); text-decoration: none; background: var(--surface);
+}
+.release .release-lessons a:hover { border-color: var(--line-strong); }
+.release .release-lessons .muted { font-size: 0.85rem; margin-left: auto; white-space: nowrap; }
+.contribute-grid { display: grid; gap: 14px; margin: 24px 0; }
+@media (min-width: 720px) { .contribute-grid { grid-template-columns: 1fr 1fr; } }
+.contribute-card { padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+.contribute-card h2 { font-size: 1.25rem; margin: 0 0 6px; }
+.contribute-card p { margin: 0 0 12px; }

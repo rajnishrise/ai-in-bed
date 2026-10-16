@@ -1,6 +1,8 @@
 # AI in Bed 🛏️
 
-Learn AI one cozy scroll at a time. A mobile-first Next.js site with 20 bite-sized lessons across three levels (Beginner, Intermediate, Advanced), 20 hand-drawn SVG infographics, 40+ tap-to-answer quizzes, a glossary and a library of the open-source material every lesson builds on.
+Learn AI one cozy scroll at a time. A mobile-first Next.js site with 42 bite-sized lessons across three levels (Beginner, Intermediate, Advanced), hand-drawn SVG infographics, interactive explainers, in-browser Python, quizzes with spaced review, learning tracks, a glossary and a library of the open-source material every lesson builds on. It installs as an app and lessons can be saved for offline reading (`public/sw.js`).
+
+Want to help? See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Run locally
 

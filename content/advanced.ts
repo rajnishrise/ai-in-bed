@@ -1,4 +1,5 @@
 import { advancedMore } from "./advanced-more";
+import { advancedNew } from "./advanced-new";
 import type { Level } from "./types";
 
 export const advanced: Level = {
@@ -839,5 +840,6 @@ export const advanced: Level = {
       ],
     },
     ...advancedMore,
+    ...advancedNew,
   ],
 };

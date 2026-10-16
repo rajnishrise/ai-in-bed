@@ -15,7 +15,7 @@ import { LessonText } from "@/components/LessonText";
 import { Quiz } from "@/components/Quiz";
 import { ReadingBar } from "@/components/ReadingBar";
 import { ReaderToggle, ReelChrome, SwipeHint } from "@/components/Reel";
-import { SITE_NAME, absoluteUrl } from "@/lib/site";
+import { SITE_NAME, absoluteUrl, suggestEditUrl } from "@/lib/site";
 
 type Params = { level: string; slug: string };
 
@@ -276,6 +276,11 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
 
             <CompleteButton lessonKey={key} />
             <LessonFeedback lessonKey={key} />
+            <p className="suggest-edit">
+              <a href={suggestEditUrl(lesson.title, `/learn/${level.id}/${lesson.slug}`)} target="_blank" rel="noopener noreferrer">
+                <Icon name="edit" size={15} /> Spotted a mistake? Suggest an edit
+              </a>
+            </p>
 
             <nav className="pager" aria-label="Lesson navigation">
               {prev ? (

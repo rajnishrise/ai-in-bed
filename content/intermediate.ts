@@ -1,4 +1,5 @@
 import { intermediateMore } from "./intermediate-more";
+import { intermediateNew } from "./intermediate-new";
 import type { Level } from "./types";
 
 export const intermediate: Level = {
@@ -792,5 +793,6 @@ export const intermediate: Level = {
       ],
     },
     ...intermediateMore,
+    ...intermediateNew,
   ],
 };

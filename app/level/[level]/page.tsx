@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { LessonList } from "@/components/LessonList";
 import { LevelMeter } from "@/components/LevelMeter";
 import { MoonPhase } from "@/components/MoonPhase";
+import { SaveOffline } from "@/components/Offline";
 import { SITE_NAME, absoluteUrl } from "@/lib/site";
 
 type Params = { level: string };
@@ -77,6 +78,11 @@ export default async function LevelPage({ params }: { params: Promise<Params> })
         <LevelMeter level={level} />
       </header>
       <LessonList level={level} />
+      <SaveOffline
+        id={`level-${level.id}`}
+        label={`the ${level.name} level`}
+        urls={[`/level/${level.id}`, ...level.lessons.map((l) => `/learn/${level.id}/${l.slug}`)]}
+      />
       <LevelComplete
         levelId={level.id}
         levelName={level.name}

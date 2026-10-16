@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Header } from "@/components/Header";
 import { LogoMark, Wordmark } from "@/components/Logo";
 import { TabBar } from "@/components/NavLinks";
+import { InstallButton, ServiceWorker } from "@/components/Offline";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -69,6 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Wordmark />
               </Link>
               <p className="muted">{SITE_TAGLINE} Free, no sign-up. Your progress stays in your browser.</p>
+              <InstallButton />
             </div>
             <nav className="footer-links" aria-label="Footer">
               <Link href="/level/beginner">Beginner</Link>
@@ -78,6 +80,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/review">Review</Link>
               <Link href="/resources">Library</Link>
               <Link href="/glossary">Glossary</Link>
+              <Link href="/new">What&apos;s new</Link>
+              <Link href="/contribute">Contribute</Link>
             </nav>
             <p className="footer-note muted">
               Lessons are original summaries that credit and link to the open and free material they draw on. See the{" "}
@@ -86,6 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </footer>
         <TabBar />
+        <ServiceWorker />
         <Analytics />
       </body>
     </html>

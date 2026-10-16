@@ -30,5 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     { url: absoluteUrl("/resources"), lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: absoluteUrl("/glossary"), lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: absoluteUrl("/new"), lastModified: now, changeFrequency: "weekly", priority: 0.5 },
+    { url: absoluteUrl("/contribute"), lastModified: now, changeFrequency: "yearly", priority: 0.4 },
   ];
 }
