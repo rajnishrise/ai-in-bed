@@ -22,6 +22,17 @@ export type GraphicId =
   | "rl-loop"
   | "scaling";
 
+/** Hands-on explainers the learner can play with (components/interactive). */
+export type InteractiveId =
+  | "neuron"
+  | "gradient-descent"
+  | "overfitting"
+  | "embeddings"
+  | "attention"
+  | "temperature"
+  | "rag"
+  | "diffusion";
+
 export type Block =
   /** A plain paragraph. Supports **bold** and `code`. */
   | { kind: "p"; text: string }
@@ -37,7 +48,11 @@ export type Block =
     }
   /** A "pillow thought": an analogy or aside in a soft callout. */
   | { kind: "tip"; text: string }
-  | { kind: "list"; items: string[] };
+  | { kind: "list"; items: string[] }
+  /** A playable explainer. */
+  | { kind: "interactive"; id: InteractiveId; caption: string }
+  /** Editable Python that runs in the browser (Pyodide). */
+  | { kind: "code"; title: string; code: string; note?: string; packages?: string[] };
 
 export type Source = {
   title: string;

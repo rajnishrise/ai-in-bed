@@ -1,3 +1,4 @@
+import { beginnerMore } from "./beginner-more";
 import type { Level } from "./types";
 
 export const beginner: Level = {
@@ -346,6 +347,11 @@ export const beginner: Level = {
             "One artificial neuron: multiply each input by a weight, add them up with a bias, then pass the total through an activation function.",
         },
         {
+          kind: "interactive",
+          id: "neuron",
+          caption: "Play with one neuron: change the inputs, weights and bias and watch the output.",
+        },
+        {
           kind: "card",
           title: "⚖️ Weights: how much each input matters",
           body: [
@@ -560,6 +566,11 @@ export const beginner: Level = {
             "The model scores every possible next token, picks one, appends it, and repeats.",
         },
         {
+          kind: "interactive",
+          id: "temperature",
+          caption: "Temperature controls how adventurous the next-word pick is.",
+        },
+        {
           kind: "card",
           title: "🧩 Tokens, not words",
           body: [
@@ -659,5 +670,6 @@ export const beginner: Level = {
         },
       ],
     },
+    ...beginnerMore,
   ],
 };

@@ -1,3 +1,4 @@
+import { intermediateMore } from "./intermediate-more";
 import type { Level } from "./types";
 
 export const intermediate: Level = {
@@ -25,6 +26,12 @@ export const intermediate: Level = {
           graphic: "regression",
           caption:
             "Left: linear regression fits a line through points to predict a number. Right: logistic regression squashes a line into an S-curve to predict a probability.",
+        },
+        {
+          kind: "code",
+          title: "Fit a line with least squares",
+          code: "# Hours studied -> exam score. Find the best line y = w*x + b.\nxs = [1, 2, 3, 4, 5, 6]\nys = [52, 55, 61, 64, 70, 73]\n\nn = len(xs)\nmean_x = sum(xs) / n\nmean_y = sum(ys) / n\nw = sum((x - mean_x) * (y - mean_y) for x, y in zip(xs, ys)) / sum((x - mean_x) ** 2 for x in xs)\nb = mean_y - w * mean_x\n\nmse = sum((w * x + b - y) ** 2 for x, y in zip(xs, ys)) / n\nprint(f\"score = {w:.2f} * hours + {b:.2f}\")\nprint(f\"mean squared error: {mse:.2f}\")\nprint(f\"prediction for 8 hours: {w * 8 + b:.1f}\")",
+          note: "Change the data and run again. Try adding an outlier like (7, 20) and see how much one bad point moves the line.",
         },
         {
           kind: "card",
@@ -130,6 +137,17 @@ export const intermediate: Level = {
           graphic: "gradient-descent",
           caption:
             "The loss curve is the hill. Each step moves the weight a little in the downhill direction until we settle near the bottom.",
+        },
+        {
+          kind: "interactive",
+          id: "gradient-descent",
+          caption: "Try different learning rates and starting points.",
+        },
+        {
+          kind: "code",
+          title: "Gradient descent in ten lines",
+          code: "# Learn w in y = w * x from data, one small step at a time.\ndata = [(1, 3), (2, 6), (3, 9), (4, 12)]   # the true w is 3\nw = 0.0\nlearning_rate = 0.02\n\nfor step in range(30):\n    # slope of the mean squared error with respect to w\n    grad = sum(2 * (w * x - y) * x for x, y in data) / len(data)\n    w -= learning_rate * grad\n    if step % 5 == 0:\n        loss = sum((w * x - y) ** 2 for x, y in data) / len(data)\n        print(f\"step {step:2d}  w = {w:.3f}  loss = {loss:.3f}\")\n\nprint(\"final w:\", round(w, 3))",
+          note: "Set learning_rate to 0.1 and run it. The steps overshoot and w blows up, exactly like the ball in the explainer above.",
         },
         {
           kind: "card",
@@ -241,6 +259,11 @@ export const intermediate: Level = {
             "Underfit (too simple), just right, and overfit (wiggles through every point, including the noise).",
         },
         {
+          kind: "interactive",
+          id: "overfitting",
+          caption: "Slide from too simple to too complex and watch the test error.",
+        },
+        {
           kind: "card",
           title: "😴 Underfitting",
           body: [
@@ -350,6 +373,11 @@ export const intermediate: Level = {
           graphic: "confusion-matrix",
           caption:
             "The confusion matrix: every prediction lands in one of four boxes.",
+        },
+        {
+          kind: "code",
+          title: "Precision and recall by hand",
+          code: "# 1 = spam, 0 = not spam\ntruth     = [1, 1, 1, 1, 0, 0, 0, 0, 0, 0]\npredicted = [1, 1, 1, 0, 1, 0, 0, 0, 0, 0]\n\ntp = sum(t == 1 and p == 1 for t, p in zip(truth, predicted))\nfp = sum(t == 0 and p == 1 for t, p in zip(truth, predicted))\nfn = sum(t == 1 and p == 0 for t, p in zip(truth, predicted))\n\nprecision = tp / (tp + fp)\nrecall = tp / (tp + fn)\naccuracy = sum(t == p for t, p in zip(truth, predicted)) / len(truth)\nprint(f\"accuracy  {accuracy:.0%}\")\nprint(f\"precision {precision:.0%}  (of emails flagged, how many were spam)\")\nprint(f\"recall    {recall:.0%}  (of real spam, how much we caught)\")",
         },
         {
           kind: "card",
@@ -670,6 +698,11 @@ export const intermediate: Level = {
             "A 2-D sketch of embedding space (real ones have hundreds of dimensions). Related words cluster, and directions can carry meaning.",
         },
         {
+          kind: "interactive",
+          id: "embeddings",
+          caption: "Explore a small map of word meanings.",
+        },
+        {
           kind: "card",
           title: "📍 Words as coordinates",
           body: [
@@ -758,5 +791,6 @@ export const intermediate: Level = {
         },
       ],
     },
+    ...intermediateMore,
   ],
 };

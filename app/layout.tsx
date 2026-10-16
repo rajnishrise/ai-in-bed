@@ -46,8 +46,8 @@ export const viewport: Viewport = {
   ],
 };
 
-// Applies the saved theme before first paint so there is no flash.
-const themeScript = `try{var t=localStorage.getItem('aib-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}`;
+// Applies the saved theme and reading mode before first paint so there is no flash.
+const themeScript = `try{var d=document.documentElement,t=localStorage.getItem('aib-theme');if(t)d.dataset.theme=t;if(localStorage.getItem('aib-reader')==='scroll')d.dataset.reader='scroll'}catch(e){}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -74,6 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/level/beginner">Beginner</Link>
               <Link href="/level/intermediate">Intermediate</Link>
               <Link href="/level/advanced">Advanced</Link>
+              <Link href="/tracks">Tracks</Link>
               <Link href="/review">Review</Link>
               <Link href="/resources">Library</Link>
               <Link href="/glossary">Glossary</Link>

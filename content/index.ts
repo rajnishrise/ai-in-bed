@@ -110,7 +110,7 @@ export const lessonRefs: LessonRef[] = levels.flatMap((level) =>
 );
 
 export const totalGraphics = levels.reduce(
-  (n, l) => n + l.lessons.reduce((m, s) => m + s.blocks.filter((b) => b.kind === "figure").length, 0),
+  (n, l) => n + l.lessons.reduce((m, s) => m + s.blocks.filter((b) => b.kind === "figure" || b.kind === "interactive").length, 0),
   0,
 );
 

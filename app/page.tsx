@@ -8,13 +8,15 @@ import { LevelMeter } from "@/components/LevelMeter";
 import { LogoMark } from "@/components/Logo";
 import { MoonPhase } from "@/components/MoonPhase";
 import { Tonight } from "@/components/Tonight";
+import { TrackGrid } from "@/components/TrackGrid";
+import { tracks } from "@/content/tracks";
 import { SITE_DESCRIPTION, SITE_NAME, absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 const how: { icon: IconName; title: string; text: string }[] = [
   { icon: "layers", title: "Ten minutes, one idea", text: "Each lesson is a short stack of cards you can finish before you fall asleep." },
-  { icon: "picture", title: "See it, then get it", text: "Every lesson has a drawn explainer that makes the idea click at a glance." },
+  { icon: "picture", title: "See it, play with it", text: "Drawn and interactive explainers you can poke at until the idea clicks." },
   { icon: "repeat", title: "Remember it for good", text: "Quick checks come back on a spaced schedule, right before you would forget." },
   { icon: "book", title: "Go deeper, for free", text: "Each lesson links to the open courses, books and papers it builds on." },
 ];
@@ -90,7 +92,7 @@ export default function Home() {
       </section>
 
       <div className="wrap section">
-        <Tonight lessons={lessonRefs} />
+        <Tonight lessons={lessonRefs} tracks={tracks.map(({ id, name, steps }) => ({ id, name, steps }))} />
       </div>
 
       <section id="levels" className="wrap section">
@@ -110,6 +112,12 @@ export default function Home() {
             </Link>
           ))}
         </div>
+      </section>
+
+      <section className="wrap section">
+        <p className="kicker">Tracks</p>
+        <h2 className="section-title">Or follow a path for your goal</h2>
+        <TrackGrid />
       </section>
 
       <section className="wrap section">

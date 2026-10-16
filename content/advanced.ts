@@ -1,3 +1,4 @@
+import { advancedMore } from "./advanced-more";
 import type { Level } from "./types";
 
 export const advanced: Level = {
@@ -33,6 +34,17 @@ export const advanced: Level = {
           graphic: "attention",
           caption:
             "Attention weights for the token \"it\": the model attends most strongly to \"animal\". Darker = more attention.",
+        },
+        {
+          kind: "interactive",
+          id: "attention",
+          caption: "See which words each word attends to.",
+        },
+        {
+          kind: "code",
+          title: "Attention scores in pure Python",
+          code: "import math\n\n# Tiny 2-number \"query\" and \"key\" vectors for each word.\nwords = [\"the\", \"cat\", \"sat\", \"it\"]\nkeys  = {\"the\": [0.1, 0.0], \"cat\": [0.9, 0.8], \"sat\": [0.3, 0.9], \"it\": [0.5, 0.4]}\nquery = [1.0, 0.7]   # what \"it\" is looking for: a noun, an animal\n\ndef dot(a, b):\n    return sum(x * y for x, y in zip(a, b))\n\nscores = [dot(query, keys[w]) for w in words]\nexps = [math.exp(s) for s in scores]\nweights = [e / sum(exps) for e in exps]   # softmax\n\nfor w, s, a in zip(words, scores, weights):\n    print(f\"{w:>4}  score {s:.2f}  attention {a:.0%}  \" + \"#\" * round(a * 40))",
+          note: "Change the query vector and see the attention shift. In a real transformer, queries and keys are learned and have hundreds of numbers.",
         },
         {
           kind: "card",
@@ -146,6 +158,12 @@ export const advanced: Level = {
           graphic: "llm-pipeline",
           caption:
             "The typical recipe: a huge pre-training run, then much smaller but carefully curated post-training stages.",
+        },
+        {
+          kind: "code",
+          title: "A tiny next-letter model",
+          code: "import random\nfrom collections import Counter, defaultdict\n\ntext = \"the cat sat on the mat. the dog sat on the log. the cat saw the dog.\"\n\n# \"Training\": count which letter follows each letter.\ncounts = defaultdict(Counter)\nfor a, b in zip(text, text[1:]):\n    counts[a][b] += 1\n\ndef next_letter(c):\n    options = counts[c]\n    return random.choices(list(options), weights=options.values())[0]\n\nrandom.seed(4)\nout = \"t\"\nfor _ in range(60):\n    out += next_letter(out[-1])\nprint(out)",
+          note: "This bigram model only looks one letter back, so it babbles. LLMs do the same job, predicting the next token, but look back over thousands of tokens with billions of parameters.",
         },
         {
           kind: "card",
@@ -268,6 +286,11 @@ export const advanced: Level = {
           graphic: "rag",
           caption:
             "RAG: embed the question, find the most similar document chunks, paste them into the prompt, then generate a grounded answer.",
+        },
+        {
+          kind: "interactive",
+          id: "rag",
+          caption: "Ask a shop assistant bot a question with and without retrieval.",
         },
         {
           kind: "card",
@@ -492,6 +515,11 @@ export const advanced: Level = {
           graphic: "diffusion",
           caption:
             "Forward process adds noise step by step. The model learns the reverse: predicting and removing noise to recover an image.",
+        },
+        {
+          kind: "interactive",
+          id: "diffusion",
+          caption: "Run the reverse process from static to an image.",
         },
         {
           kind: "card",
@@ -810,5 +838,6 @@ export const advanced: Level = {
         },
       ],
     },
+    ...advancedMore,
   ],
 };

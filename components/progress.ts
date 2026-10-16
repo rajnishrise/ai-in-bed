@@ -19,6 +19,8 @@ export type Progress = {
   log: Record<string, DayLog>;
   cards: Record<string, Card>;
   votes: Record<string, 1 | -1>;
+  /** The learning track the home page follows, if any. */
+  track?: string;
 };
 
 /** Days until a card is due again, by box. Box 0 means "again tonight". */
@@ -45,7 +47,7 @@ function read(): Progress {
   try {
     const raw = window.localStorage.getItem(KEY);
     const p = raw ? (JSON.parse(raw) as Partial<Progress>) : {};
-    cache = { done: p.done ?? [], log: p.log ?? {}, cards: p.cards ?? {}, votes: p.votes ?? {} };
+    cache = { done: p.done ?? [], log: p.log ?? {}, cards: p.cards ?? {}, votes: p.votes ?? {}, track: p.track };
   } catch {
     cache = { ...EMPTY };
   }
@@ -137,6 +139,9 @@ export function useProgress() {
         cards: { ...cur.cards, [id]: card },
         log: inReview ? bump(cur, "reviews") : cur.log,
       });
+    },
+    setTrack: (track: string | undefined) => {
+      write({ ...read(), track });
     },
     vote: (key: string, v: 1 | -1) => {
       const cur = read();

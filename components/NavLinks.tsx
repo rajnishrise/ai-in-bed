@@ -7,6 +7,7 @@ import { Icon, type IconName } from "./Icon";
 const items: { href: string; label: string; icon: IconName; match: string[] }[] = [
   { href: "/", label: "Home", icon: "home", match: ["/"] },
   { href: "/level/beginner", label: "Learn", icon: "layers", match: ["/level", "/learn"] },
+  { href: "/tracks", label: "Tracks", icon: "route", match: ["/tracks"] },
   { href: "/review", label: "Review", icon: "repeat", match: ["/review"] },
   { href: "/resources", label: "Library", icon: "book", match: ["/resources"] },
   { href: "/glossary", label: "Glossary", icon: "text", match: ["/glossary"] },
@@ -35,7 +36,7 @@ export function TabBar() {
   const path = usePathname();
   return (
     <nav className="tabbar" aria-label="Main">
-      {items.map((it) => (
+      {items.filter((it) => it.href !== "/glossary").map((it) => (
         <Link key={it.href} href={it.href} aria-current={isActive(path, it.match) ? "page" : undefined}>
           <Icon name={it.icon} size={21} />
           <span>{it.label}</span>

@@ -8,12 +8,15 @@ import { DAILY_REVIEW_GOAL, dueIds, goalMet, streakOf, today, useProgress } from
 const DAY = ["S", "M", "T", "W", "T", "F", "S"];
 
 /** Home-page panel: streak, the past week, tonight's lesson and due reviews. */
-export function Tonight({ lessons }: { lessons: LessonRef[] }) {
+export function Tonight({ lessons, tracks }: { lessons: LessonRef[]; tracks: { id: string; name: string; steps: string[] }[] }) {
   const { progress, isDone } = useProgress();
   const streak = streakOf(progress);
   const met = goalMet(progress);
   const due = dueIds(progress).length;
-  const next = lessons.find((l) => !isDone(l.key));
+  const track = tracks.find((t) => t.id === progress.track);
+  const byKey = new Map(lessons.map((l) => [l.key, l]));
+  const trackNext = track?.steps.map((k) => byKey.get(k)!).find((l) => l && !isDone(l.key));
+  const next = trackNext ?? lessons.find((l) => !isDone(l.key));
   const started = progress.done.length > 0 || Object.keys(progress.cards).length > 0;
   const tonightLog = progress.log[today()];
 
@@ -51,7 +54,7 @@ export function Tonight({ lessons }: { lessons: LessonRef[] }) {
         {next ? (
           <Link href={next.href} className="pick">
             <span className="pick-kicker">
-              {isDone(next.key) ? "Up next" : started ? "Tonight's lesson" : "Begin here"} · {next.levelName} {next.number}
+              {trackNext ? `${track!.name} track` : started ? "Tonight's lesson" : "Begin here"} · {next.levelName} {next.number}
             </span>
             <span className="pick-title">{next.title}</span>
             <span className="pick-summary">{next.summary}</span>

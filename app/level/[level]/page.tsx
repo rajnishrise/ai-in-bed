@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getLevel, levels } from "@/content";
+import { allQuizzes, getLevel, lessonKey, levels } from "@/content";
+import { LevelComplete } from "@/components/LevelComplete";
 import { JsonLd } from "@/components/JsonLd";
 import { LessonList } from "@/components/LessonList";
 import { LevelMeter } from "@/components/LevelMeter";
@@ -76,6 +77,12 @@ export default async function LevelPage({ params }: { params: Promise<Params> })
         <LevelMeter level={level} />
       </header>
       <LessonList level={level} />
+      <LevelComplete
+        levelId={level.id}
+        levelName={level.name}
+        lessonKeys={level.lessons.map((l) => lessonKey(level.id, l.slug))}
+        quizzes={allQuizzes.filter((q) => q.levelId === level.id)}
+      />
     </div>
   );
 }
