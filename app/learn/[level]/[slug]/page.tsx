@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getLesson, lessonKey, levels, nextLesson, quizId, stripEmoji } from "@/content";
+import { cardArt } from "@/content/cardArt";
 import type { Block } from "@/content/types";
+import { CardArt } from "@/components/cardArt";
+import { pickMotif } from "@/components/cardArt/pick";
 import { CodeRunner } from "@/components/CodeRunner";
 import { CompleteButton } from "@/components/CompleteButton";
 import { Graphic } from "@/components/graphics";
@@ -12,6 +15,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { LessonAudio } from "@/components/LessonAudio";
 import { LessonFeedback } from "@/components/LessonFeedback";
 import { LessonText } from "@/components/LessonText";
+import { NextUp, ScrollToTop } from "@/components/NextUp";
 import { Quiz } from "@/components/Quiz";
 import { ReadingBar } from "@/components/ReadingBar";
 import { ReaderToggle, ReelChrome, SwipeHint } from "@/components/Reel";
@@ -51,6 +55,10 @@ function renderBlock(b: Block, i: number, ctx: Ctx) {
     case "card":
       return (
         <article key={i} className="card">
+          <CardArt
+            motif={cardArt[`${ctx.levelId}/${ctx.slug}|${b.title}`] ?? pickMotif(`${b.title} ${b.body.join(" ")}`)}
+            seedKey={`${ctx.levelId}/${ctx.slug}|${b.title}`}
+          />
           <h3>{stripEmoji(b.title)}</h3>
           {b.body.map((s, j) => (
             <p key={j}>{t(s)}</p>
@@ -204,7 +212,8 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
         }}
       />
       <ReadingBar />
-      <article className="wrap narrow lesson">
+      <ScrollToTop />
+      <article key={key} className="wrap narrow lesson">
         <ReelChrome total={slides.length + 3} />
         <section className="slide slide-intro">
           <div className="slide-inner">
@@ -237,7 +246,12 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
             key={si}
             className={`slide ${group.length === 1 && group[0].kind !== "p" ? `slide-${group[0].kind}` : "slide-text"}`}
           >
-            <div className="slide-inner">{group.map((b) => renderBlock(b, blockIndex++, ctx))}</div>
+            <div className="slide-inner">
+              {group.every((b) => TEXT_KINDS.has(b.kind)) && (
+                <CardArt variant="slide" motif={pickMotif(group.map(speechFor).join(" "))} seedKey={`${key}#${si}`} />
+              )}
+              {group.map((b) => renderBlock(b, blockIndex++, ctx))}
+            </div>
           </section>
         ))}
 
@@ -251,11 +265,6 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
                 ))}
               </ul>
             </section>
-          </div>
-        </section>
-
-        <section className="slide slide-end">
-          <div className="slide-inner">
             <section className="sources">
               <h2>Go deeper, free and open</h2>
               <ul>
@@ -273,38 +282,51 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
                 ))}
               </ul>
             </section>
+          </div>
+        </section>
 
-            <CompleteButton lessonKey={key} />
+        <section className="slide slide-end">
+          <div className="slide-inner">
+            <div className="lesson-done">
+              <span className="lesson-done-mark" aria-hidden>
+                <Icon name="moon" size={26} />
+              </span>
+              <h2>That&apos;s the lesson</h2>
+              <p className="muted">
+                {lesson.title} · {lesson.minutes} min
+              </p>
+            </div>
+
+            {next ? (
+              <NextUp
+                lessonKey={key}
+                href={`/learn/${next.level.id}/${next.lesson.slug}`}
+                kicker={next.level.id !== level.id ? `Next level: ${next.level.name}` : "Up next"}
+                title={next.lesson.title}
+                meta={`${next.level.name} · ${next.lesson.minutes} min`}
+              />
+            ) : (
+              <NextUp
+                lessonKey={key}
+                href="/resources"
+                kicker="You finished every lesson"
+                title="Explore the Library"
+                meta="Free courses, books and papers"
+              />
+            )}
+
+            <CompleteButton lessonKey={key} subtle />
             <LessonFeedback lessonKey={key} />
             <p className="suggest-edit">
               <a href={suggestEditUrl(lesson.title, `/learn/${level.id}/${lesson.slug}`)} target="_blank" rel="noopener noreferrer">
                 <Icon name="edit" size={15} /> Spotted a mistake? Suggest an edit
               </a>
             </p>
-
-            <nav className="pager" aria-label="Lesson navigation">
-              {prev ? (
-                <Link href={`/learn/${level.id}/${prev.slug}`} className="pager-link">
-                  <span className="muted">Previous</span>
-                  <span>{prev.title}</span>
-                </Link>
-              ) : (
-                <span />
-              )}
-              {next ? (
-                <Link href={`/learn/${next.level.id}/${next.lesson.slug}`} className="pager-link right">
-                  <span className="muted">
-                    {next.level.id !== level.id ? `Next level: ${next.level.name}` : "Next"}
-                  </span>
-                  <span>{next.lesson.title}</span>
-                </Link>
-              ) : (
-                <Link href="/resources" className="pager-link right">
-                  <span className="muted">You finished every lesson</span>
-                  <span>Explore the Library</span>
-                </Link>
-              )}
-            </nav>
+            {prev && (
+              <Link href={`/learn/${level.id}/${prev.slug}`} className="prev-link">
+                <Icon name="back" size={15} /> Previous: {prev.title}
+              </Link>
+            )}
           </div>
         </section>
       </article>
