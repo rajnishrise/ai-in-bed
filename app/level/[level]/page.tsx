@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getLevel, levels } from "@/content";
+import { JsonLd } from "@/components/JsonLd";
 import { LessonList } from "@/components/LessonList";
 import { LevelMeter } from "@/components/LevelMeter";
+import { MoonPhase } from "@/components/MoonPhase";
+import { SITE_NAME, absoluteUrl } from "@/lib/site";
 
 type Params = { level: string };
 
@@ -13,25 +16,60 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const level = getLevel((await params).level);
-  return level ? { title: `${level.name} lessons`, description: level.description } : {};
+  if (!level) return {};
+  const title = `${level.name} AI lessons`;
+  return {
+    title,
+    description: `${level.tagline} ${level.description}`,
+    alternates: { canonical: `/level/${level.id}` },
+    openGraph: { title, description: level.tagline, url: `/level/${level.id}` },
+  };
 }
 
 export default async function LevelPage({ params }: { params: Promise<Params> }) {
   const level = getLevel((await params).level);
   if (!level) notFound();
+  const url = absoluteUrl(`/level/${level.id}`);
   return (
     <div className="wrap narrow section">
-      <div className="level-switch" role="tablist" aria-label="Levels">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Course",
+              name: `${level.name} AI`,
+              description: level.description,
+              url,
+              educationalLevel: level.name,
+              isAccessibleForFree: true,
+              inLanguage: "en",
+              provider: { "@type": "Organization", name: SITE_NAME, url: absoluteUrl("/") },
+              hasPart: level.lessons.map((l) => ({
+                "@type": "LearningResource",
+                name: l.title,
+                url: absoluteUrl(`/learn/${level.id}/${l.slug}`),
+              })),
+            },
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: SITE_NAME, item: absoluteUrl("/") },
+                { "@type": "ListItem", position: 2, name: level.name, item: url },
+              ],
+            },
+          ],
+        }}
+      />
+      <nav className="level-switch" aria-label="Levels">
         {levels.map((l) => (
-          <Link key={l.id} href={`/level/${l.id}`} className={`pill ${l.id === level.id ? "active" : ""}`} role="tab" aria-selected={l.id === level.id}>
-            {l.emoji} {l.name}
+          <Link key={l.id} href={`/level/${l.id}`} className={`pill ${l.id === level.id ? "active" : ""}`} aria-current={l.id === level.id ? "page" : undefined}>
+            {l.name}
           </Link>
         ))}
-      </div>
+      </nav>
       <header className={`level-head level-${level.id}`}>
-        <span className="level-emoji big" aria-hidden>
-          {level.emoji}
-        </span>
+        <MoonPhase level={level.id} size={48} />
         <h1>{level.name}</h1>
         <p className="level-tag">{level.tagline}</p>
         <p>{level.description}</p>

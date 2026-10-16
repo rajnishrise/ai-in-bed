@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { Level } from "@/content/types";
+import { Icon } from "./Icon";
 import { useProgress } from "./progress";
 
 export function LessonList({ level }: { level: Level }) {
@@ -15,15 +16,14 @@ export function LessonList({ level }: { level: Level }) {
           <li key={lesson.slug}>
             <Link href={`/learn/${level.id}/${lesson.slug}`} className={`lesson-row ${done ? "done" : ""}`}>
               <span className="lesson-num" aria-hidden>
-                {done ? "✓" : i + 1}
+                {done ? <Icon name="check" size={16} /> : String(i + 1).padStart(2, "0")}
               </span>
               <span className="lesson-body">
-                <span className="lesson-title">
-                  {lesson.emoji} {lesson.title}
-                </span>
+                <span className="lesson-title">{lesson.title}</span>
                 <span className="lesson-summary">{lesson.summary}</span>
                 <span className="lesson-meta">
-                  {lesson.minutes} min · {quizzes} quizzes{done ? " · finished" : ""}
+                  {lesson.minutes} min · {quizzes} quick check{quizzes === 1 ? "" : "s"}
+                  {done ? " · finished" : ""}
                 </span>
               </span>
             </Link>

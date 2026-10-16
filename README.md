@@ -34,3 +34,9 @@ Add an object to a level's `lessons` array. A lesson is a list of blocks: `p` (p
 ## Credits
 
 Lessons are original summaries written for this site. They link to and credit the free and open material they draw on, including Google's Machine Learning Crash Course (CC BY 4.0), Dive into Deep Learning (CC BY-SA 4.0), Hugging Face courses (Apache 2.0), Elements of AI, 3Blue1Brown, fast.ai, Stanford CS229/CS231n/CS224n, Andrej Karpathy's Zero to Hero, Jay Alammar, Lilian Weng, Distill, Sutton & Barto, OpenAI Spinning Up and the original research papers. The full list with licences is on the `/resources` page.
+
+## Settings
+
+- **Custom domain:** set `NEXT_PUBLIC_SITE_URL` (for example `https://aiinbed.com`) in Vercel so canonical URLs, the sitemap and share images use it. Without it the site uses the Vercel production URL.
+- **Analytics:** enable Web Analytics in the Vercel project (Analytics tab). Lesson ratings are sent as the custom event `Lesson feedback`; custom events need a Vercel Pro plan, page views work on every plan.
+- Share images use Instrument Serif (SIL Open Font License, see `assets/fonts/OFL.txt`).

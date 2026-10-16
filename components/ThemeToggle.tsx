@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Icon } from "./Icon";
 
 type Theme = "night" | "morning";
 
@@ -22,14 +23,10 @@ export function ThemeToggle() {
     }
   };
 
+  const label = theme === "night" ? "Switch to light mode" : "Switch to dark mode";
   return (
-    <button
-      className="icon-btn"
-      onClick={flip}
-      aria-label={theme === "night" ? "Switch to morning (light) mode" : "Switch to night (dark) mode"}
-      title={theme === "night" ? "Morning mode" : "Night mode"}
-    >
-      {theme === "night" ? "☀️" : "🌙"}
+    <button className="icon-btn" onClick={flip} aria-label={label} title={label}>
+      <Icon name={theme === "night" ? "sun" : "moon"} size={18} />
     </button>
   );
 }

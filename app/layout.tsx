@@ -1,31 +1,48 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Nunito } from "next/font/google";
+import { Instrument_Serif, Inter } from "next/font/google";
+import Link from "next/link";
 import { Header } from "@/components/Header";
+import { LogoMark, Wordmark } from "@/components/Logo";
+import { TabBar } from "@/components/NavLinks";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const body = Nunito({ subsets: ["latin"], variable: "--font-body", display: "swap" });
-const display = Fraunces({ subsets: ["latin"], variable: "--font-display", display: "swap" });
+const body = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" });
+const display = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "AI in Bed · Learn AI one cozy scroll at a time",
-    template: "%s · AI in Bed",
+    default: `${SITE_NAME} · ${SITE_TAGLINE}`,
+    template: `%s · ${SITE_NAME}`,
   },
-  description:
-    "Free, bite-sized AI lessons for beginners, intermediate and advanced learners, with infographics and quick quizzes. Built on the best open-source learning material.",
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
   openGraph: {
-    title: "AI in Bed",
-    description: "Learn AI one cozy scroll at a time.",
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_TAGLINE,
     type: "website",
+    locale: "en",
   },
+  twitter: { card: "summary_large_image" },
+  appleWebApp: { title: SITE_NAME, statusBarStyle: "black-translucent" },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0e1024" },
-    { media: "(prefers-color-scheme: light)", color: "#fbf6ee" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0f" },
+    { media: "(prefers-color-scheme: light)", color: "#f6f4ef" },
   ],
 };
 
@@ -39,19 +56,36 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         <Header />
-        <main>{children}</main>
+        <main id="main">{children}</main>
         <footer className="site-footer">
-          <div className="wrap">
-            <p>
-              🛏️ <strong>AI in Bed</strong> · free lessons, no sign-up. Progress is saved only in your browser.
-            </p>
-            <p className="muted">
-              Lessons are original summaries that link to and credit the open-source and free material they draw on.
-              See the <a href="/resources">Library</a> for every source and its licence.
+          <div className="wrap footer-inner">
+            <div className="footer-brand">
+              <Link href="/" className="brand" aria-label="AI in Bed home">
+                <LogoMark size={24} />
+                <Wordmark />
+              </Link>
+              <p className="muted">{SITE_TAGLINE} Free, no sign-up. Your progress stays in your browser.</p>
+            </div>
+            <nav className="footer-links" aria-label="Footer">
+              <Link href="/level/beginner">Beginner</Link>
+              <Link href="/level/intermediate">Intermediate</Link>
+              <Link href="/level/advanced">Advanced</Link>
+              <Link href="/review">Review</Link>
+              <Link href="/resources">Library</Link>
+              <Link href="/glossary">Glossary</Link>
+            </nav>
+            <p className="footer-note muted">
+              Lessons are original summaries that credit and link to the open and free material they draw on. See the{" "}
+              <Link href="/resources">Library</Link> for every source and its licence.
             </p>
           </div>
         </footer>
+        <TabBar />
+        <Analytics />
       </body>
     </html>
   );
