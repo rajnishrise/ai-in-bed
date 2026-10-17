@@ -10,9 +10,16 @@ import { MoonPhase } from "@/components/MoonPhase";
 import { Tonight } from "@/components/Tonight";
 import { TrackGrid } from "@/components/TrackGrid";
 import { tracks } from "@/content/tracks";
-import { SITE_DESCRIPTION, SITE_NAME, absoluteUrl } from "@/lib/site";
+import { Faq } from "@/components/Faq";
+import { homeFaqs } from "@/content/faq";
+import { courseDetails } from "@/lib/schema";
+import { HOME_TITLE, SITE_DESCRIPTION, SITE_NAME, absoluteUrl } from "@/lib/site";
 
-export const metadata: Metadata = { alternates: { canonical: "/" } };
+export const metadata: Metadata = {
+  title: { absolute: HOME_TITLE },
+  alternates: { canonical: "/" },
+  openGraph: { siteName: SITE_NAME, type: "website", locale: "en", title: HOME_TITLE, description: SITE_DESCRIPTION, url: "/" },
+};
 
 const how: { icon: IconName; title: string; text: string }[] = [
   { icon: "layers", title: "Ten minutes, one idea", text: "Each lesson is a short stack of cards you can finish before you fall asleep." },
@@ -30,19 +37,19 @@ export default function Home() {
         data={{
           "@context": "https://schema.org",
           "@graph": [
-            { "@type": "WebSite", name: SITE_NAME, url: absoluteUrl("/"), description: SITE_DESCRIPTION },
             {
               "@type": "ItemList",
+              name: "Free AI course levels",
               itemListElement: levels.map((l, i) => ({
                 "@type": "ListItem",
                 position: i + 1,
                 item: {
                   "@type": "Course",
-                  name: `${l.name} AI`,
+                  name: `${l.name} AI course`,
                   description: l.description,
                   url: absoluteUrl(`/level/${l.id}`),
-                  provider: { "@type": "Organization", name: SITE_NAME, url: absoluteUrl("/") },
-                  isAccessibleForFree: true,
+                  educationalLevel: l.name,
+                  ...courseDetails(l.lessons.reduce((n, s) => n + s.minutes, 0)),
                 },
               })),
             },
@@ -52,13 +59,13 @@ export default function Home() {
       <section className="hero">
         <div className="wrap hero-inner">
           <div className="hero-copy">
-            <p className="kicker">Free · Open-source · Made for phones</p>
+            <p className="kicker">Free AI course · Open-source · Made for phones</p>
             <h1>
               Understand AI, <em>one quiet night</em> at a time.
             </h1>
             <p className="lead">
-              Calm, ten-minute lessons from first ideas to how frontier models work. Clear pictures, quick checks that
-              stick, and the best free courses on the web when you want more.
+              Learn AI for free in calm, ten-minute lessons, from first ideas to how ChatGPT-style models work. Clear
+              pictures, quick checks that stick, and the best free AI courses on the web when you want more.
             </p>
             <div className="hero-cta">
               <Link href="/learn/beginner/what-is-ai" className="btn btn-primary">
@@ -96,7 +103,7 @@ export default function Home() {
       </div>
 
       <section id="levels" className="wrap section">
-        <p className="kicker">Three levels</p>
+        <p className="kicker">Three levels, beginner to advanced</p>
         <h2 className="section-title">From first light to full moon</h2>
         <div className="level-grid">
           {levels.map((level) => (
@@ -148,10 +155,16 @@ export default function Home() {
               </span>
             ))}
           </p>
-          <Link href="/resources" className="text-link">
-            Explore the Library <Icon name="arrow" size={16} />
+          <Link href="/free-ai-courses" className="text-link">
+            The best free AI courses, compared <Icon name="arrow" size={16} />
           </Link>
         </div>
+      </section>
+
+      <section className="wrap section">
+        <p className="kicker">Questions</p>
+        <h2 className="section-title">About this free AI course</h2>
+        <Faq faqs={homeFaqs} />
       </section>
     </>
   );

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { TrackGrid } from "@/components/TrackGrid";
 
 export const metadata: Metadata = {
-  title: "Learning tracks",
+  title: "AI Learning Paths: Free Tracks for Work, Builders and Engineers",
   description: "Guided paths through the AI in Bed lessons for different goals: AI for everyone, AI at work, builders and ML engineers.",
   alternates: { canonical: "/tracks" },
 };

@@ -42,3 +42,4 @@ Lessons are original summaries written for this site. They link to and credit th
 - **Custom domain:** set `NEXT_PUBLIC_SITE_URL` (for example `https://aiinbed.com`) in Vercel so canonical URLs, the sitemap and share images use it. Without it the site uses the Vercel production URL.
 - **Analytics:** enable Web Analytics in the Vercel project (Analytics tab). Lesson ratings are sent as the custom event `Lesson feedback`; custom events need a Vercel Pro plan, page views work on every plan.
 - Share images use Instrument Serif (SIL Open Font License, see `assets/fonts/OFL.txt`).
+- **Search and AI answers:** every page carries structured data (`lib/schema.ts`), `/llms.txt` and `/llms-full.txt` give AI assistants a map and the full lesson text, and `robots.ts` names the AI crawlers that are welcome. After a deploy with new pages, run `npm run indexnow -- https://your-domain` to tell Bing and Copilot right away.

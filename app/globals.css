@@ -2769,3 +2769,90 @@ strong {
     border: 1px solid var(--line);
   }
 }
+
+/* ---------- FAQ ---------- */
+.faq {
+  border-top: 1px solid var(--line);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 0;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  color: var(--gold);
+  font-size: 1.4rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.faq-item h3 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.faq-item p {
+  color: var(--muted);
+  margin: 0 0 20px;
+  max-width: 44rem;
+}
+
+/* ---------- Free AI courses guide ---------- */
+.course-picks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+  display: grid;
+  gap: 12px;
+}
+
+.course-pick {
+  padding: 18px 20px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.course-pick h3 {
+  font-size: 1.3rem;
+  margin: 0 0 4px;
+}
+
+.course-pick p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.course-pick .pick-for {
+  color: var(--gold);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.course-pick.ours {
+  background: var(--glow), var(--surface);
+  border-color: var(--line-strong);
+}

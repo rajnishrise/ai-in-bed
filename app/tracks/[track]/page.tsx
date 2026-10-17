@@ -5,7 +5,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { SaveOffline } from "@/components/Offline";
 import { TrackPath } from "@/components/TrackPath";
 import { getTrack, trackLessons, tracks } from "@/content/tracks";
-import { SITE_NAME, absoluteUrl } from "@/lib/site";
+import { courseDetails } from "@/lib/schema";
+import { absoluteUrl } from "@/lib/site";
 
 type Params = { track: string };
 
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const t = getTrack((await params).track);
   if (!t) return {};
   return {
-    title: `${t.name} track`,
+    title: `${t.name}: a free AI learning path`,
     description: `${t.tagline} ${t.description}`,
     alternates: { canonical: `/tracks/${t.id}` },
   };
@@ -36,8 +37,7 @@ export default async function TrackPage({ params }: { params: Promise<Params> })
           name: `${t.name} (AI in Bed track)`,
           description: t.description,
           url: absoluteUrl(`/tracks/${t.id}`),
-          isAccessibleForFree: true,
-          provider: { "@type": "Organization", name: SITE_NAME, url: absoluteUrl("/") },
+          ...courseDetails(steps.reduce((n, s) => n + s.lesson.minutes, 0)),
           hasPart: steps.map((s) => ({ "@type": "LearningResource", name: s.lesson.title, url: absoluteUrl(s.href) })),
         }}
       />

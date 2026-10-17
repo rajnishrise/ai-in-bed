@@ -2,7 +2,10 @@
 export const SITE_NAME = "AI in Bed";
 export const SITE_TAGLINE = "Understand AI, one quiet night at a time.";
 export const SITE_DESCRIPTION =
-  "Free, bite-sized AI lessons for beginners, intermediate and advanced learners, with infographics, quick quizzes and spaced review. Built on the best open-source learning material.";
+  "A free AI course in ten-minute lessons, from beginner to advanced. Learn AI online with visual explainers, quizzes and the best open courses from Stanford, Google and fast.ai. No sign-up.";
+
+/** The home page's search title: what people type, then the brand. */
+export const HOME_TITLE = "Free AI Course: Learn AI in 10-Minute Lessons · AI in Bed";
 
 /**
  * The canonical origin. Set NEXT_PUBLIC_SITE_URL once you have a custom

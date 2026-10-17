@@ -3,7 +3,7 @@ import { resources } from "@/content/resources";
 import { LibraryBrowser } from "@/components/LibraryBrowser";
 
 export const metadata: Metadata = {
-  title: "Library of free AI courses, books and papers",
+  title: "Free AI Courses, Books and Papers: The Open Library",
   description: "The free and open-source AI courses, books, papers and tools AI in Bed is built on, filterable by level and format.",
   alternates: { canonical: "/resources" },
 };

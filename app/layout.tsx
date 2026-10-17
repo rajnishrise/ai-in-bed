@@ -5,7 +5,9 @@ import Link from "next/link";
 import { Header } from "@/components/Header";
 import { LogoMark, Wordmark } from "@/components/Logo";
 import { TabBar } from "@/components/NavLinks";
+import { JsonLd } from "@/components/JsonLd";
 import { InstallButton, ServiceWorker } from "@/components/Offline";
+import { organization, website } from "@/lib/schema";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -29,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: SITE_NAME,
     title: SITE_NAME,
-    description: SITE_TAGLINE,
+    description: SITE_DESCRIPTION,
     type: "website",
     locale: "en",
   },
@@ -57,6 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
+        <JsonLd data={{ "@context": "https://schema.org", "@graph": [organization, website] }} />
         <a href="#main" className="skip-link">
           Skip to content
         </a>
@@ -77,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/level/intermediate">Intermediate</Link>
               <Link href="/level/advanced">Advanced</Link>
               <Link href="/tracks">Tracks</Link>
+              <Link href="/free-ai-courses">Free AI courses</Link>
               <Link href="/review">Review</Link>
               <Link href="/resources">Library</Link>
               <Link href="/glossary">Glossary</Link>

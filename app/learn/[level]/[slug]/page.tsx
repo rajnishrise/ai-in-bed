@@ -19,6 +19,7 @@ import { NextUp, ScrollToTop } from "@/components/NextUp";
 import { Quiz } from "@/components/Quiz";
 import { ReadingBar } from "@/components/ReadingBar";
 import { ReaderToggle, ReelChrome, SwipeHint } from "@/components/Reel";
+import { lastUpdated, lessonPublished, publisher } from "@/lib/schema";
 import { SITE_NAME, absoluteUrl, suggestEditUrl } from "@/lib/site";
 
 type Params = { level: string; slug: string };
@@ -34,10 +35,19 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { lesson, level: lv } = found;
   const path = `/learn/${lv.id}/${lesson.slug}`;
   return {
-    title: lesson.title,
+    title: `${lesson.title} · Free ${lv.name.toLowerCase()} AI lesson`,
     description: lesson.summary,
     alternates: { canonical: path },
-    openGraph: { type: "article", title: lesson.title, description: lesson.summary, url: path },
+    openGraph: {
+      siteName: SITE_NAME,
+      type: "article",
+      locale: "en",
+      title: lesson.title,
+      description: lesson.summary,
+      url: path,
+      publishedTime: lessonPublished(lessonKey(lv.id, lesson.slug)),
+      modifiedTime: lastUpdated,
+    },
   };
 }
 
@@ -187,12 +197,16 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
               url,
               learningResourceType: "Lesson",
               educationalLevel: level.name,
+              image: `${url}/opengraph-image`,
+              datePublished: lessonPublished(key),
+              dateModified: lastUpdated,
+              author: publisher,
               timeRequired: `PT${lesson.minutes}M`,
               isAccessibleForFree: true,
               inLanguage: "en",
               teaches: lesson.takeaways,
-              isPartOf: { "@type": "Course", name: `${level.name} AI`, url: absoluteUrl(`/level/${level.id}`) },
-              publisher: { "@type": "Organization", name: SITE_NAME, url: absoluteUrl("/") },
+              isPartOf: { "@type": "Course", name: `${level.name} AI course`, url: absoluteUrl(`/level/${level.id}`) },
+              publisher,
               citation: lesson.sources.map((s) => ({
                 "@type": "CreativeWork",
                 name: s.title,

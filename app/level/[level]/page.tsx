@@ -8,6 +8,7 @@ import { LessonList } from "@/components/LessonList";
 import { LevelMeter } from "@/components/LevelMeter";
 import { MoonPhase } from "@/components/MoonPhase";
 import { SaveOffline } from "@/components/Offline";
+import { courseDetails } from "@/lib/schema";
 import { SITE_NAME, absoluteUrl } from "@/lib/site";
 
 type Params = { level: string };
@@ -19,12 +20,12 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const level = getLevel((await params).level);
   if (!level) return {};
-  const title = `${level.name} AI lessons`;
+  const title = `Free ${level.name} AI Course: ${level.lessons.length} Short Lessons`;
   return {
     title,
     description: `${level.tagline} ${level.description}`,
     alternates: { canonical: `/level/${level.id}` },
-    openGraph: { title, description: level.tagline, url: `/level/${level.id}` },
+    openGraph: { siteName: SITE_NAME, type: "website", locale: "en", title, description: level.tagline, url: `/level/${level.id}` },
   };
 }
 
@@ -40,13 +41,11 @@ export default async function LevelPage({ params }: { params: Promise<Params> })
           "@graph": [
             {
               "@type": "Course",
-              name: `${level.name} AI`,
+              name: `${level.name} AI course`,
               description: level.description,
               url,
               educationalLevel: level.name,
-              isAccessibleForFree: true,
-              inLanguage: "en",
-              provider: { "@type": "Organization", name: SITE_NAME, url: absoluteUrl("/") },
+              ...courseDetails(level.lessons.reduce((n, l) => n + l.minutes, 0)),
               hasPart: level.lessons.map((l) => ({
                 "@type": "LearningResource",
                 name: l.title,

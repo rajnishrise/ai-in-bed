@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { glossary } from "@/content/glossary";
+import { JsonLd } from "@/components/JsonLd";
 import { termSlug } from "@/lib/glossary";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "AI glossary in plain English",
-  description: "Plain-English definitions of the AI terms used in AI in Bed, from attention to transformers.",
+  title: "AI Glossary: Machine Learning Terms in Plain English",
+  description: "Plain-English definitions of AI and machine learning terms, from attention and embeddings to RAG, LoRA and transformers.",
   alternates: { canonical: "/glossary" },
 };
 
@@ -13,6 +15,22 @@ export default function GlossaryPage() {
   const letters = [...new Set(sorted.map((t) => t.term[0].toUpperCase()))];
   return (
     <div className="wrap narrow section">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "DefinedTermSet",
+          "@id": absoluteUrl("/glossary"),
+          name: "AI glossary in plain English",
+          url: absoluteUrl("/glossary"),
+          hasDefinedTerm: sorted.map((t) => ({
+            "@type": "DefinedTerm",
+            name: t.term,
+            description: t.def,
+            url: absoluteUrl(`/glossary#${termSlug(t.term)}`),
+            inDefinedTermSet: absoluteUrl("/glossary"),
+          })),
+        }}
+      />
       <p className="kicker">Glossary</p>
       <h1>Every bit of jargon, in plain English</h1>
       <p className="lead">The terms used across the lessons. In a lesson, tap an underlined word to see its definition.</p>
