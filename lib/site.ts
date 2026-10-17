@@ -8,14 +8,16 @@ export const SITE_DESCRIPTION =
 export const HOME_TITLE = "Free AI Course: Learn AI in 10-Minute Lessons · AI in Bed";
 
 /**
- * The canonical origin. Set NEXT_PUBLIC_SITE_URL once you have a custom
- * domain; on Vercel it falls back to the project's production URL.
+ * The canonical origin: https://www.aiinbed.com. NEXT_PUBLIC_SITE_URL overrides it;
+ * on Vercel the project's production domain is used.
  */
 export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL ||
   (process.env.VERCEL_PROJECT_PRODUCTION_URL
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000")
+    : process.env.NODE_ENV === "production"
+      ? "https://www.aiinbed.com"
+      : "http://localhost:3000")
 ).replace(/\/$/, "");
 
 /** The public source repository, used for "suggest an edit" and the contributor guide. */
