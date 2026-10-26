@@ -44,8 +44,8 @@ export function GlossaryTerm({ label, term, def, slug }: { label: string; term: 
           </span>
           <strong className="term-sheet-term">{term}</strong>
           <span className="term-sheet-def">{def}</span>
-          <Link href={`/glossary#${slug}`} className="term-sheet-link">
-            All terms <Icon name="arrow" size={14} />
+          <Link href={`/glossary/${slug}`} className="term-sheet-link">
+            Example and more <Icon name="arrow" size={14} />
           </Link>
         </span>
       )}

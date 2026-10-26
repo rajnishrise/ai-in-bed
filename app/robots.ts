@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 
-const disallow = ["/review", "/offline"];
+const disallow = ["/review", "/offline", "/md/"];
 
 /*
  * AI search and assistant crawlers, named so it's explicit they're welcome:

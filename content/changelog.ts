@@ -8,6 +8,17 @@ export type Release = {
 
 export const releases: Release[] = [
   {
+    date: "2026-10-26",
+    title: "A 30-day plan, a page for every AI term and free certificates",
+    notes: [
+      "Learn AI in 30 days: a night-by-night plan through every lesson, with review nights and calendar reminders you can download.",
+      "Every glossary term now has its own page with a plain-English answer, an everyday example and the lessons that teach it. Twelve new terms, from machine learning to AGI.",
+      "A guide to free AI courses with certificates, from Harvard, the University of Helsinki, IBM, Kaggle and Hugging Face.",
+      "Lessons list the key terms they use, and each lesson can be read as plain text by AI assistants by adding .md to its address.",
+    ],
+    lessons: [],
+  },
+  {
     date: "2026-10-16",
     title: "Twelve new lessons, offline reading and an app you can install",
     notes: [
@@ -72,5 +83,5 @@ export const releases: Release[] = [
   },
 ];
 
-/** Lessons from the latest release, marked "New" in lesson lists. */
-export const newLessonKeys = new Set(releases[0].lessons);
+/** Lessons from the latest release that added any, marked "New" in lesson lists. */
+export const newLessonKeys = new Set(releases.find((r) => r.lessons.length)?.lessons);

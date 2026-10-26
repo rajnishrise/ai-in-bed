@@ -28,7 +28,7 @@ export function GET() {
     items.push({
       kind: "Glossary",
       title: t.term,
-      href: `/glossary#${termSlug(t.term)}`,
+      href: `/glossary/${termSlug(t.term)}`,
       meta: "Glossary",
       text: t.def,
       hay: `${t.term} ${t.def}`.toLowerCase(),

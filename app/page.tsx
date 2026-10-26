@@ -125,6 +125,9 @@ export default function Home() {
         <p className="kicker">Tracks</p>
         <h2 className="section-title">Or follow a path for your goal</h2>
         <TrackGrid />
+        <Link href="/learn-ai-in-30-days" className="text-link" style={{ marginTop: 18, display: "inline-flex" }}>
+          Or learn everything in 30 nights with the free plan <Icon name="arrow" size={16} />
+        </Link>
       </section>
 
       <section className="wrap section">

@@ -171,7 +171,8 @@ export default function FreeAiCoursesPage() {
       ))}
 
       <p className="muted" style={{ marginTop: 24 }}>
-        Looking for articles, papers and interactive tools too? The <Link href="/resources">Library</Link> has all{" "}
+        Need proof of completion? See <Link href="/free-ai-courses-with-certificates">free AI courses with certificates</Link>.
+        Want a schedule? Follow the <Link href="/learn-ai-in-30-days">30-day AI learning plan</Link>. Looking for articles, papers and interactive tools too? The <Link href="/resources">Library</Link> has all{" "}
         {resources.length}.
       </p>
 
