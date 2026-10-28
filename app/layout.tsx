@@ -37,6 +37,13 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image" },
   appleWebApp: { title: SITE_NAME, statusBarStyle: "black-translucent" },
+  // Search Console and Bing Webmaster ownership tags, set as env vars on Vercel.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+      : undefined,
+  },
 };
 
 export const viewport: Viewport = {
