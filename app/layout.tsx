@@ -8,7 +8,7 @@ import { TabBar } from "@/components/NavLinks";
 import { JsonLd } from "@/components/JsonLd";
 import { InstallButton, ServiceWorker } from "@/components/Offline";
 import { organization, website } from "@/lib/schema";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
+import { INSTAGRAM_URL, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const body = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" });
@@ -95,6 +95,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/glossary">Glossary</Link>
               <Link href="/new">What&apos;s new</Link>
               <Link href="/contribute">Contribute</Link>
+              <a href={INSTAGRAM_URL} rel="me noopener" target="_blank">
+                Instagram
+              </a>
             </nav>
             <p className="footer-note muted">
               Lessons are original summaries that credit and link to the open and free material they draw on. See the{" "}
