@@ -1,5 +1,7 @@
 /** Public site settings shared by metadata, the sitemap and share images. */
 export const SITE_NAME = "AI in Bed";
+/** Other ways people write the name; Google uses these for the site name and brand searches. */
+export const SITE_ALT_NAMES = ["AIinBed", "aiinbed", "aiinbed.com"];
 export const SITE_TAGLINE = "Understand AI, one quiet night at a time.";
 export const SITE_DESCRIPTION =
   "A free AI course in ten-minute lessons, from beginner to advanced. Learn AI online with visual explainers, quizzes and the best open courses from Stanford, Google and fast.ai. No sign-up.";
