@@ -1,5 +1,5 @@
 import { releases } from "@/content/changelog";
-import { REPO_URL, SITE_ALT_NAMES, SITE_DESCRIPTION, SITE_NAME, absoluteUrl } from "@/lib/site";
+import { INSTAGRAM_URL, REPO_URL, SITE_ALT_NAMES, SITE_DESCRIPTION, SITE_NAME, absoluteUrl } from "@/lib/site";
 
 /** Shared schema.org pieces so every page describes the site the same way. */
 
@@ -12,7 +12,7 @@ export const organization = {
   alternateName: SITE_ALT_NAMES,
   url: absoluteUrl("/"),
   logo: absoluteUrl("/icons/512"),
-  sameAs: [REPO_URL],
+  sameAs: [INSTAGRAM_URL, REPO_URL],
 };
 
 export const website = {

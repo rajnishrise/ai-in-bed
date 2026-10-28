@@ -25,6 +25,9 @@ export const SITE_URL = (
 /** The public source repository, used for "suggest an edit" and the contributor guide. */
 export const REPO_URL = "https://github.com/rajnishrise/ai-in-bed";
 
+/** The site's social profiles, linked from the footer and listed in schema sameAs. */
+export const INSTAGRAM_URL = "https://www.instagram.com/aiinbed/";
+
 /** A pre-filled GitHub issue for reporting a mistake or suggesting an improvement. */
 export function suggestEditUrl(title: string, path: string) {
   const body = [
