@@ -19,6 +19,7 @@ import { NextUp, ScrollToTop } from "@/components/NextUp";
 import { Quiz } from "@/components/Quiz";
 import { ReadingBar } from "@/components/ReadingBar";
 import { ReaderToggle, ReelChrome, SwipeHint } from "@/components/Reel";
+import { lessonTerms, termSlug } from "@/lib/glossary";
 import { lastUpdated, lessonPublished, publisher } from "@/lib/schema";
 import { SITE_NAME, absoluteUrl, suggestEditUrl } from "@/lib/site";
 
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return {
     title: `${lesson.title} · Free ${lv.name.toLowerCase()} AI lesson`,
     description: lesson.summary,
-    alternates: { canonical: path },
+    alternates: { canonical: path, types: { "text/markdown": `${path}.md` } },
     openGraph: {
       siteName: SITE_NAME,
       type: "article",
@@ -176,6 +177,8 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
   const key = lessonKey(level.id, lesson.slug);
   const url = absoluteUrl(`/learn/${level.id}/${lesson.slug}`);
   const slides = toSlides(lesson.blocks);
+  const terms = lessonTerms(lesson).slice(0, 8);
+  const quizzes = lesson.blocks.filter((b) => b.kind === "quiz");
   let blockIndex = 0;
   const speech = [
     `${lesson.title}. ${plain(lesson.summary)}`,
@@ -205,6 +208,12 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
               isAccessibleForFree: true,
               inLanguage: "en",
               teaches: lesson.takeaways,
+              about: terms.map((t) => ({
+                "@type": "DefinedTerm",
+                name: t.term,
+                description: t.def,
+                url: absoluteUrl(`/glossary/${termSlug(t.term)}`),
+              })),
               isPartOf: { "@type": "Course", name: `${level.name} AI course`, url: absoluteUrl(`/level/${level.id}`) },
               publisher,
               citation: lesson.sources.map((s) => ({
@@ -214,6 +223,24 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
                 author: s.by,
               })),
             },
+            ...(quizzes.length
+              ? [
+                  {
+                    "@type": "Quiz",
+                    name: `${lesson.title}: quick check`,
+                    url,
+                    educationalLevel: level.name,
+                    isAccessibleForFree: true,
+                    hasPart: quizzes.map((b) => ({
+                      "@type": "Question",
+                      eduQuestionType: "Multiple choice",
+                      text: b.question,
+                      suggestedAnswer: b.options.filter((_, k) => k !== b.answer).map((o) => ({ "@type": "Answer", text: o })),
+                      acceptedAnswer: { "@type": "Answer", text: b.options[b.answer], answerExplanation: { "@type": "Comment", text: b.explain } },
+                    })),
+                  },
+                ]
+              : []),
             {
               "@type": "BreadcrumbList",
               itemListElement: [
@@ -279,6 +306,20 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
                 ))}
               </ul>
             </section>
+            {terms.length > 0 && (
+              <section className="lesson-terms">
+                <h2>Terms in this lesson</h2>
+                <ul className="term-chips">
+                  {terms.map((t) => (
+                    <li key={t.term}>
+                      <Link href={`/glossary/${termSlug(t.term)}`} className="pill">
+                        {t.term}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
             <section className="sources">
               <h2>Go deeper, free and open</h2>
               <ul>

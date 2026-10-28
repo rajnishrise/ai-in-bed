@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { glossary } from "@/content/glossary";
 import { JsonLd } from "@/components/JsonLd";
 import { termSlug } from "@/lib/glossary";
@@ -26,14 +27,14 @@ export default function GlossaryPage() {
             "@type": "DefinedTerm",
             name: t.term,
             description: t.def,
-            url: absoluteUrl(`/glossary#${termSlug(t.term)}`),
+            url: absoluteUrl(`/glossary/${termSlug(t.term)}`),
             inDefinedTermSet: absoluteUrl("/glossary"),
           })),
         }}
       />
       <p className="kicker">Glossary</p>
       <h1>Every bit of jargon, in plain English</h1>
-      <p className="lead">The terms used across the lessons. In a lesson, tap an underlined word to see its definition.</p>
+      <p className="lead">The terms used across the lessons. Tap a term for an example and the lessons that teach it. In a lesson, tap an underlined word to see its definition.</p>
       <nav className="alpha" aria-label="Jump to letter">
         {letters.map((l) => (
           <a key={l} href={`#letter-${l}`}>
@@ -47,7 +48,9 @@ export default function GlossaryPage() {
           return (
             <div key={t.term} className="gloss" id={termSlug(t.term)}>
               {first && <span id={`letter-${t.term[0].toUpperCase()}`} className="anchor" />}
-              <dt>{t.term}</dt>
+              <dt>
+                <Link href={`/glossary/${termSlug(t.term)}`}>{t.term}</Link>
+              </dt>
               <dd>{t.def}</dd>
             </div>
           );

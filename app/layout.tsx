@@ -80,7 +80,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/level/intermediate">Intermediate</Link>
               <Link href="/level/advanced">Advanced</Link>
               <Link href="/tracks">Tracks</Link>
+              <Link href="/learn-ai-in-30-days">30-day plan</Link>
               <Link href="/free-ai-courses">Free AI courses</Link>
+              <Link href="/free-ai-courses-with-certificates">Free certificates</Link>
               <Link href="/review">Review</Link>
               <Link href="/resources">Library</Link>
               <Link href="/glossary">Glossary</Link>

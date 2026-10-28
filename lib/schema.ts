@@ -27,7 +27,7 @@ export const website = {
 export const publisher = { "@id": absoluteUrl("/#organization") };
 
 /** The fields Google's Course rich result asks for: free offer, online, self-paced. */
-export function courseDetails(minutes: number) {
+export function courseDetails(minutes: number, schedule?: { nights: number; minutesPerNight: number }) {
   return {
     provider: publisher,
     isAccessibleForFree: true,
@@ -38,6 +38,14 @@ export function courseDetails(minutes: number) {
         "@type": "CourseInstance",
         courseMode: "Online",
         courseWorkload: `PT${Math.max(1, Math.round(minutes / 60))}H`,
+        ...(schedule && {
+          courseSchedule: {
+            "@type": "Schedule",
+            repeatFrequency: "Daily",
+            repeatCount: schedule.nights,
+            duration: `PT${schedule.minutesPerNight}M`,
+          },
+        }),
       },
     ],
   };
