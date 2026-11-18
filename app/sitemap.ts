@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { lessonKey, levels } from "@/content";
 import { posts } from "@/content/blog";
 import { glossary } from "@/content/glossary";
+import { resourceGuides } from "@/content/resource-guides";
 import { tracks } from "@/content/tracks";
 import { termSlug } from "@/lib/glossary";
 import { lastUpdated, lessonPublished } from "@/lib/schema";
@@ -44,6 +45,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     })),
     { url: absoluteUrl("/resources"), lastModified: updated, changeFrequency: "monthly", priority: 0.7 },
+    ...resourceGuides.map((g) => ({
+      url: absoluteUrl(`/resources/${g.slug}`),
+      lastModified: updated,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
     { url: absoluteUrl("/glossary"), lastModified: updated, changeFrequency: "monthly", priority: 0.6 },
     ...glossary.map((t) => ({
       url: absoluteUrl(`/glossary/${termSlug(t.term)}`),

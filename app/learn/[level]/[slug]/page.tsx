@@ -18,6 +18,8 @@ import { LessonFeedback } from "@/components/LessonFeedback";
 import { LessonText } from "@/components/LessonText";
 import { NextUp, ScrollToTop } from "@/components/NextUp";
 import { Quiz } from "@/components/Quiz";
+import { Faq } from "@/components/Faq";
+import { pageSeo } from "@/content/seo";
 import { ReadingBar } from "@/components/ReadingBar";
 import { ReaderToggle, ReelChrome, SwipeHint } from "@/components/Reel";
 import { lessonTerms, termSlug } from "@/lib/glossary";
@@ -36,9 +38,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   if (!found) return {};
   const { lesson, level: lv } = found;
   const path = `/learn/${lv.id}/${lesson.slug}`;
+  const seo = pageSeo[path];
   return {
-    title: `${lesson.title} · Free ${lv.name.toLowerCase()} AI lesson`,
-    description: lesson.summary,
+    title: seo?.title ?? `${lesson.title} · Free ${lv.name.toLowerCase()} AI lesson`,
+    description: seo?.description ?? lesson.summary,
     alternates: { canonical: path, types: { "text/markdown": `${path}.md` } },
     openGraph: {
       siteName: SITE_NAME,
@@ -177,6 +180,7 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
   const ctx: Ctx = { quizNo: () => ++q, seen: new Set(), levelId: level.id, slug: lesson.slug };
   const key = lessonKey(level.id, lesson.slug);
   const url = absoluteUrl(`/learn/${level.id}/${lesson.slug}`);
+  const seo = pageSeo[`/learn/${level.id}/${lesson.slug}`];
   const slides = toSlides(lesson.blocks);
   const terms = lessonTerms(lesson).slice(0, 8);
   const quizzes = lesson.blocks.filter((b) => b.kind === "quiz");
@@ -271,7 +275,7 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
                 {level.name} · {String(index + 1).padStart(2, "0")}
               </p>
               <h1>{lesson.title}</h1>
-              <p className="lead">{lesson.summary}</p>
+              <p className="lead">{seo?.answer ?? lesson.summary}</p>
               <p className="lesson-meta">
                 <Icon name="clock" size={15} /> {lesson.minutes} min read
                 <span className="muted"> · Tap underlined words for a definition</span>
@@ -338,6 +342,12 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
                 ))}
               </ul>
             </section>
+            {seo && (
+              <section className="lesson-faq">
+                <h2>Questions</h2>
+                <Faq faqs={seo.faqs} />
+              </section>
+            )}
           </div>
         </section>
 

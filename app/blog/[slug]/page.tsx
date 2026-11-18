@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { type BlogBlock, getPost, postMinutes, postText, posts } from "@/content/blog";
 import { BlogText, linkedGlossarySlugs } from "@/components/BlogText";
 import { Faq } from "@/components/Faq";
+import { PopularGuides } from "@/components/PopularGuides";
 import { Icon } from "@/components/Icon";
 import { JsonLd } from "@/components/JsonLd";
 import { ReadingBar } from "@/components/ReadingBar";
@@ -241,6 +242,10 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
           ))}
         </ul>
       </section>
+
+      <div style={{ marginTop: 44 }}>
+        <PopularGuides title="Popular free lessons" limit={6} />
+      </div>
 
       <h2 className="section-title" style={{ marginTop: 44 }}>
         Read next

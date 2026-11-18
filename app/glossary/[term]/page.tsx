@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { glossary } from "@/content/glossary";
 import { termExamples } from "@/content/glossary-examples";
+import { termSeo } from "@/content/glossary-seo";
+import { PopularGuides } from "@/components/PopularGuides";
 import { Faq } from "@/components/Faq";
 import { Icon } from "@/components/Icon";
 import { JsonLd } from "@/components/JsonLd";
@@ -23,12 +25,14 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const t = getTerm((await params).term);
   if (!t) return {};
   const path = `/glossary/${termSlug(t.term)}`;
-  const title = `What Is ${t.term}? AI Term Explained Simply`;
+  const seo = termSeo[t.term];
+  const title = seo?.title ?? `What Is ${t.term}? A Simple Explanation`;
+  const description = seo?.answer ?? `${t.term} in plain English: ${t.def}`;
   return {
     title,
-    description: t.def,
+    description,
     alternates: { canonical: path },
-    openGraph: { siteName: SITE_NAME, type: "article", locale: "en", title, description: t.def, url: path },
+    openGraph: { siteName: SITE_NAME, type: "article", locale: "en", title, description, url: path },
   };
 }
 
@@ -45,8 +49,10 @@ export default async function TermPage({ params }: { params: Promise<Params> }) 
   const prev = sorted[(i - 1 + sorted.length) % sorted.length];
   const next = sorted[(i + 1) % sorted.length];
   const name = termInSentence(term.term);
+  const seo = termSeo[term.term];
+  const answer = seo?.answer ?? term.def;
   const faqs = [
-    { q: `What is ${name} in simple terms?`, a: term.def },
+    { q: `What is ${name} in simple terms?`, a: answer },
     ...(example ? [{ q: `What is an example of ${name}?`, a: example }] : []),
     ...(lessons.length
       ? [
@@ -56,6 +62,7 @@ export default async function TermPage({ params }: { params: Promise<Params> }) 
           },
         ]
       : []),
+    ...(seo?.faqs ?? []),
   ];
 
   return (
@@ -68,14 +75,14 @@ export default async function TermPage({ params }: { params: Promise<Params> }) 
               "@type": "DefinedTerm",
               "@id": url,
               name: term.term,
-              description: term.def,
+              description: answer,
               url,
               inDefinedTermSet: { "@type": "DefinedTermSet", name: "AI glossary in plain English", url: absoluteUrl("/glossary") },
             },
             {
               "@type": "WebPage",
               url,
-              name: `What is ${name}?`,
+              name: seo?.h1 ?? `What is ${name}?`,
               about: { "@id": url },
               dateModified: lastUpdated,
               publisher,
@@ -98,16 +105,24 @@ export default async function TermPage({ params }: { params: Promise<Params> }) 
         <span aria-current="page">{term.term}</span>
       </nav>
       <p className="kicker">AI glossary</p>
-      <h1>What is {name}?</h1>
+      <h1>{seo?.h1 ?? `What is ${name}?`}</h1>
       <section className="term-box" aria-label="Short answer">
         <p className="term-label">Short answer</p>
-        <p className="term-answer">{term.def}</p>
+        <p className="term-answer">{answer}</p>
       </section>
       {example && (
         <section className="term-box term-box-soft" aria-label="Example">
           <p className="term-label">For example</p>
           <p className="term-example">{example}</p>
         </section>
+      )}
+
+      {seo?.guide && (
+        <p className="term-guide">
+          <Link href={seo.guide.href} className="text-link">
+            {seo.guide.title} <Icon name="arrow" size={15} />
+          </Link>
+        </p>
       )}
 
       {lessons.length > 0 && (
@@ -169,6 +184,10 @@ export default async function TermPage({ params }: { params: Promise<Params> }) 
         Questions
       </h2>
       <Faq faqs={faqs} />
+
+      <div style={{ marginTop: 40 }}>
+        <PopularGuides title="Start learning AI, free" limit={5} />
+      </div>
 
       <nav className="term-nav" aria-label="More terms">
         <Link href={`/glossary/${termSlug(prev.term)}`}>

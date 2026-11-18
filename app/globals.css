@@ -3777,3 +3777,15 @@ html[data-warm="on"][data-theme="morning"] body::before {
     animation: none !important;
   }
 }
+
+/* Search guides: link under a glossary answer, questions at the end of a lesson */
+.term-guide {
+  margin: 18px 0 0;
+}
+.lesson-faq {
+  margin-top: 28px;
+}
+.lesson-faq h2 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
