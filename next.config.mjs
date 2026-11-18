@@ -5,7 +5,10 @@ const nextConfig = {
   // Plain Markdown of any lesson for AI assistants: add .md to its address.
   async rewrites() {
     return {
-      beforeFiles: [{ source: "/learn/:level/:slug.md", destination: "/md/:level/:slug" }],
+      beforeFiles: [
+        { source: "/learn/:level/:slug.md", destination: "/md/:level/:slug" },
+        { source: "/blog/:slug.md", destination: "/blog-md/:slug" },
+      ],
     };
   },
   async redirects() {

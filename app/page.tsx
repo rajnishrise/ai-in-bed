@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { sortedPosts } from "@/content/blog";
 import { lessonRefs, levels, totalGraphics, totalLessons, totalQuizzes } from "@/content";
 import { resources } from "@/content/resources";
 import { Icon, type IconName } from "@/components/Icon";
@@ -162,6 +163,24 @@ export default function Home() {
             The best free AI courses, compared <Icon name="arrow" size={16} />
           </Link>
         </div>
+      </section>
+
+      <section className="wrap section">
+        <p className="kicker">From the blog</p>
+        <h2 className="section-title">Common AI questions, answered simply</h2>
+        <ul className="link-list home-blog">
+          {sortedPosts.slice(0, 4).map((p) => (
+            <li key={p.slug}>
+              <Link href={`/blog/${p.slug}`}>
+                <span>{p.title}</span>
+                <span className="muted">{p.topic}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <Link href="/blog" className="text-link" style={{ marginTop: 18, display: "inline-flex" }}>
+          All {sortedPosts.length} posts <Icon name="arrow" size={16} />
+        </Link>
       </section>
 
       <section className="wrap section">

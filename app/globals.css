@@ -3104,3 +3104,90 @@ strong {
 .plan-lessons .muted {
   white-space: nowrap;
 }
+
+/* ---------- Blog ---------- */
+.blog-list {
+  list-style: none;
+  padding: 0;
+  margin: 32px 0 0;
+  display: grid;
+  gap: 14px;
+}
+
+.blog-card {
+  display: block;
+  padding: 22px 22px 18px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+
+.blog-card:hover {
+  border-color: var(--line-strong);
+}
+
+.blog-card:hover h2 {
+  color: var(--gold);
+}
+
+.blog-card .pick-for {
+  color: var(--gold);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+
+.blog-card h2 {
+  font-size: 1.6rem;
+  line-height: 1.15;
+  margin: 0 0 8px;
+  transition: color 0.2s ease;
+}
+
+.blog-card p.muted {
+  margin: 0 0 12px;
+  line-height: 1.55;
+}
+
+.blog-toc {
+  margin: 20px 0 8px;
+  padding: 16px 20px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+}
+
+.blog-toc ul {
+  margin: 0;
+  padding-left: 1.2em;
+  font-size: 0.95rem;
+}
+
+.blog-toc li {
+  margin-bottom: 0.3em;
+}
+
+.blog-toc a {
+  color: var(--muted);
+}
+
+.blog-toc a:hover {
+  color: var(--gold);
+}
+
+.blog-section h2 {
+  margin-top: 40px;
+  scroll-margin-top: 80px;
+}
+
+.blog-post ol.lesson-ul {
+  padding-left: 1.4em;
+}
+
+.home-blog {
+  max-width: 760px;
+}

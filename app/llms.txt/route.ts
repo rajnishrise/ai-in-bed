@@ -1,4 +1,5 @@
 import { levels, totalLessons } from "@/content";
+import { sortedPosts } from "@/content/blog";
 import { glossary } from "@/content/glossary";
 import { resources } from "@/content/resources";
 import { PLAN_DAYS } from "@/content/plan";
@@ -34,6 +35,9 @@ export function GET() {
     `- [Free AI courses with certificates](${absoluteUrl("/free-ai-courses-with-certificates")}): free courses that give a certificate or badge (Harvard CS50 AI, Elements of AI, Kaggle, IBM, Hugging Face), compared.`,
     `- [Library](${absoluteUrl("/resources")}): ${resources.length} free AI courses, books, papers and tools, with licences.`,
     `- [AI glossary](${absoluteUrl("/glossary")}): ${glossary.length} AI and machine learning terms in plain English.`,
+    "",
+    "## Blog: common AI questions, answered",
+    ...sortedPosts.map((p) => `- [${p.title}](${absoluteUrl(`/blog/${p.slug}.md`)}): ${p.answer}`),
     "",
     "## AI glossary: what each term means",
     ...[...glossary]

@@ -11,6 +11,7 @@ const items: { href: string; label: string; icon: IconName; match: string[] }[] 
   { href: "/review", label: "Review", icon: "repeat", match: ["/review"] },
   { href: "/resources", label: "Library", icon: "book", match: ["/resources"] },
   { href: "/glossary", label: "Glossary", icon: "text", match: ["/glossary"] },
+  { href: "/blog", label: "Blog", icon: "text", match: ["/blog"] },
 ];
 
 function isActive(path: string, match: string[]) {
@@ -36,7 +37,7 @@ export function TabBar() {
   const path = usePathname();
   return (
     <nav className="tabbar" aria-label="Main">
-      {items.filter((it) => it.href !== "/glossary").map((it) => (
+      {items.filter((it) => it.href !== "/glossary" && it.href !== "/blog").map((it) => (
         <Link key={it.href} href={it.href} aria-current={isActive(path, it.match) ? "page" : undefined}>
           <Icon name={it.icon} size={21} />
           <span>{it.label}</span>

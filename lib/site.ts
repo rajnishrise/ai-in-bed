@@ -29,7 +29,7 @@ export const REPO_URL = "https://github.com/rajnishrise/ai-in-bed";
 export const INSTAGRAM_URL = "https://www.instagram.com/aiinbed/";
 
 /** A pre-filled GitHub issue for reporting a mistake or suggesting an improvement. */
-export function suggestEditUrl(title: string, path: string) {
+export function suggestEditUrl(title: string, path: string, kind = "Lesson") {
   const body = [
     `Page: ${absoluteUrl(path)}`,
     "",
@@ -37,7 +37,7 @@ export function suggestEditUrl(title: string, path: string) {
     "",
     "",
   ].join("\n");
-  const q = new URLSearchParams({ title: `Lesson: ${title}`, body, labels: "content" });
+  const q = new URLSearchParams({ title: `${kind}: ${title}`, body, labels: "content" });
   return `${REPO_URL}/issues/new?${q}`;
 }
 
