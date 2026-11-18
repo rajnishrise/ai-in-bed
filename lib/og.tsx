@@ -24,7 +24,7 @@ export async function ogImage({ kicker, title, subtitle }: { kicker: string; tit
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "64px 72px",
-          background: "radial-gradient(circle at 85% 0%, #2a2440 0%, #0a0a0f 60%)",
+          background: "radial-gradient(circle at 85% 0%, #4a2a1c 0%, #140d0b 60%)",
           color: "#f2f0eb",
           position: "relative",
         }}
@@ -35,7 +35,7 @@ export async function ogImage({ kicker, title, subtitle }: { kicker: string; tit
           viewBox="0 0 32 32"
           style={{ position: "absolute", right: -40, top: -30, opacity: 0.9 }}
         >
-          <path d="M14.04 4.16A12 12 0 1 0 27.84 17.96A10 10 0 0 1 14.04 4.16Z" fill="#e3c38f" fillOpacity="0.16" />
+          <path d="M14.04 4.16A12 12 0 1 0 27.84 17.96A10 10 0 0 1 14.04 4.16Z" fill="#f4b46a" fillOpacity="0.16" />
           <path d="M20.6 8.4 26.4 6.2M20.6 8.4 24.6 12.8M26.4 6.2 24.6 12.8" stroke="#f2f0eb" strokeOpacity="0.25" strokeWidth="0.2" />
           <circle cx="20.6" cy="8.4" r="0.6" fill="#f2f0eb" fillOpacity="0.5" />
           <circle cx="26.4" cy="6.2" r="0.45" fill="#f2f0eb" fillOpacity="0.5" />
@@ -43,18 +43,18 @@ export async function ogImage({ kicker, title, subtitle }: { kicker: string; tit
         </svg>
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <svg width="52" height="52" viewBox="0 0 32 32">
-            <path d="M14.04 4.16A12 12 0 1 0 27.84 17.96A10 10 0 0 1 14.04 4.16Z" fill="#e3c38f" />
+            <path d="M14.04 4.16A12 12 0 1 0 27.84 17.96A10 10 0 0 1 14.04 4.16Z" fill="#f4b46a" />
             <path d="M20.6 8.4 26.4 6.2M20.6 8.4 24.6 12.8M26.4 6.2 24.6 12.8" stroke="#f2f0eb" strokeOpacity="0.7" strokeWidth="0.9" />
             <circle cx="20.6" cy="8.4" r="1.45" fill="#f2f0eb" />
             <circle cx="26.4" cy="6.2" r="1.15" fill="#f2f0eb" />
             <circle cx="24.6" cy="12.8" r="1.25" fill="#f2f0eb" />
           </svg>
           <div style={{ display: "flex", fontFamily: "Serif", fontSize: 44 }}>
-            AI&nbsp;<span style={{ fontFamily: "SerifItalic", color: "#e3c38f" }}>in</span>&nbsp;Bed
+            AI&nbsp;<span style={{ fontFamily: "SerifItalic", color: "#f4b46a" }}>in</span>&nbsp;Bed
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", maxWidth: 980 }}>
-          <div style={{ fontSize: 26, letterSpacing: 4, textTransform: "uppercase", color: "#e3c38f", marginBottom: 20 }}>
+          <div style={{ fontSize: 26, letterSpacing: 4, textTransform: "uppercase", color: "#f4b46a", marginBottom: 20 }}>
             {kicker}
           </div>
           <div style={{ fontFamily: "Serif", fontSize: titleSize, lineHeight: 1.02, letterSpacing: -1 }}>{title}</div>

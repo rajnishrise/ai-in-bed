@@ -5,7 +5,7 @@ import { allQuizzes, getLevel, lessonKey, levels } from "@/content";
 import { LevelComplete } from "@/components/LevelComplete";
 import { JsonLd } from "@/components/JsonLd";
 import { LessonList } from "@/components/LessonList";
-import { LevelMeter } from "@/components/LevelMeter";
+import { Constellation } from "@/components/Constellation";
 import { MoonPhase } from "@/components/MoonPhase";
 import { SaveOffline } from "@/components/Offline";
 import { courseDetails } from "@/lib/schema";
@@ -74,7 +74,7 @@ export default async function LevelPage({ params }: { params: Promise<Params> })
         <h1>{level.name}</h1>
         <p className="level-tag">{level.tagline}</p>
         <p>{level.description}</p>
-        <LevelMeter level={level} />
+        <Constellation levelId={level.id} lessonKeys={level.lessons.map((l) => lessonKey(level.id, l.slug))} />
       </header>
       <LessonList level={level} />
       <SaveOffline

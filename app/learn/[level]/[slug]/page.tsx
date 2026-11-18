@@ -8,6 +8,7 @@ import { CardArt } from "@/components/cardArt";
 import { pickMotif } from "@/components/cardArt/pick";
 import { CodeRunner } from "@/components/CodeRunner";
 import { CompleteButton } from "@/components/CompleteButton";
+import { Constellation } from "@/components/Constellation";
 import { Graphic } from "@/components/graphics";
 import { Icon } from "@/components/Icon";
 import { Interactive } from "@/components/interactive";
@@ -350,6 +351,11 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
               <p className="muted">
                 {lesson.title} · {lesson.minutes} min
               </p>
+              <Constellation
+                levelId={level.id}
+                lessonKeys={level.lessons.map((l) => lessonKey(level.id, l.slug))}
+                current={key}
+              />
             </div>
 
             {next ? (
