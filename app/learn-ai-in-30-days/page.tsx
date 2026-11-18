@@ -10,7 +10,7 @@ import { courseDetails } from "@/lib/schema";
 import { SITE_NAME, absoluteUrl } from "@/lib/site";
 
 const perNight = Math.round(planMinutes / PLAN_DAYS);
-const title = `Learn AI in 30 Days: A Free Plan, ${perNight} Minutes a Night`;
+const title = `How to Learn AI in 30 Days for Free: A Beginner Plan, ${perNight} Min a Night`;
 const description = `A free 30-day AI learning plan for beginners: ${totalLessons} short lessons from what AI is to how ChatGPT-style models, RAG and agents work, about ${perNight} minutes a night, with weekly review and calendar reminders.`;
 
 export const metadata: Metadata = {

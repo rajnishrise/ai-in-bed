@@ -12,6 +12,7 @@ import { Tonight } from "@/components/Tonight";
 import { TrackGrid } from "@/components/TrackGrid";
 import { tracks } from "@/content/tracks";
 import { Faq } from "@/components/Faq";
+import { PopularGuides } from "@/components/PopularGuides";
 import { homeFaqs } from "@/content/faq";
 import { courseDetails } from "@/lib/schema";
 import { HOME_TITLE, SITE_DESCRIPTION, SITE_NAME, absoluteUrl } from "@/lib/site";
@@ -179,6 +180,11 @@ export default function Home() {
         <Link href="/blog" className="text-link" style={{ marginTop: 18, display: "inline-flex" }}>
           All {sortedPosts.length} posts <Icon name="arrow" size={16} />
         </Link>
+      </section>
+
+      <section className="wrap section">
+        <p className="kicker">Most read</p>
+        <PopularGuides title="Popular lessons and guides" />
       </section>
 
       <section className="wrap section">

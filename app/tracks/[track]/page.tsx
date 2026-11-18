@@ -5,6 +5,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { SaveOffline } from "@/components/Offline";
 import { TrackPath } from "@/components/TrackPath";
 import { getTrack, trackLessons, tracks } from "@/content/tracks";
+import { Faq } from "@/components/Faq";
+import { pageSeo } from "@/content/seo";
 import { courseDetails } from "@/lib/schema";
 import { absoluteUrl } from "@/lib/site";
 
@@ -17,9 +19,10 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const t = getTrack((await params).track);
   if (!t) return {};
+  const seo = pageSeo[`/tracks/${t.id}`];
   return {
-    title: `${t.name}: a free AI learning path`,
-    description: `${t.tagline} ${t.description}`,
+    title: seo?.title ?? `${t.name}: a free AI learning path`,
+    description: seo?.description ?? `${t.tagline} ${t.description}`,
     alternates: { canonical: `/tracks/${t.id}` },
   };
 }
@@ -28,6 +31,7 @@ export default async function TrackPage({ params }: { params: Promise<Params> })
   const t = getTrack((await params).track);
   if (!t) notFound();
   const steps = trackLessons(t);
+  const seo = pageSeo[`/tracks/${t.id}`];
   return (
     <div className="wrap narrow section">
       <JsonLd
@@ -53,7 +57,7 @@ export default async function TrackPage({ params }: { params: Promise<Params> })
       <p className="level-tag" style={{ color: "var(--gold)" }}>
         {t.tagline}
       </p>
-      <p className="muted">{t.description}</p>
+      <p className="muted">{seo?.answer ?? t.description}</p>
       <TrackPath
         trackId={t.id}
         steps={steps.map((s) => ({
@@ -66,6 +70,14 @@ export default async function TrackPage({ params }: { params: Promise<Params> })
         }))}
       />
       <SaveOffline id={`track-${t.id}`} label="this track" urls={[`/tracks/${t.id}`, ...steps.map((s) => s.href)]} />
+      {seo && (
+        <>
+          <h2 className="section-title" style={{ marginTop: 48 }}>
+            Questions
+          </h2>
+          <Faq faqs={seo.faqs} />
+        </>
+      )}
     </div>
   );
 }

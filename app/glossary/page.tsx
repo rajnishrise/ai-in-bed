@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { glossary } from "@/content/glossary";
 import { JsonLd } from "@/components/JsonLd";
+import { PopularGuides } from "@/components/PopularGuides";
 import { termSlug } from "@/lib/glossary";
 import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "AI Glossary: Machine Learning Terms in Plain English",
+  title: `AI Glossary: ${glossary.length} AI and Machine Learning Terms Explained Simply`,
   description: "Plain-English definitions of AI and machine learning terms, from attention and embeddings to RAG, LoRA and transformers.",
   alternates: { canonical: "/glossary" },
 };
@@ -63,6 +64,9 @@ export default function GlossaryPage() {
         </a>{" "}
         covers hundreds of terms.
       </p>
+      <div style={{ marginTop: 40 }}>
+        <PopularGuides title="Learn the ideas behind the words" />
+      </div>
     </div>
   );
 }

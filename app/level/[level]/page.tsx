@@ -8,6 +8,8 @@ import { LessonList } from "@/components/LessonList";
 import { Constellation } from "@/components/Constellation";
 import { MoonPhase } from "@/components/MoonPhase";
 import { SaveOffline } from "@/components/Offline";
+import { Faq } from "@/components/Faq";
+import { pageSeo } from "@/content/seo";
 import { courseDetails } from "@/lib/schema";
 import { SITE_NAME, absoluteUrl } from "@/lib/site";
 
@@ -20,10 +22,11 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const level = getLevel((await params).level);
   if (!level) return {};
-  const title = `Free ${level.name} AI Course: ${level.lessons.length} Short Lessons`;
+  const seo = pageSeo[`/level/${level.id}`];
+  const title = seo?.title ?? `Free ${level.name} AI Course: ${level.lessons.length} Short Lessons`;
   return {
     title,
-    description: `${level.tagline} ${level.description}`,
+    description: seo?.description ?? `${level.tagline} ${level.description}`,
     alternates: { canonical: `/level/${level.id}` },
     openGraph: { siteName: SITE_NAME, type: "website", locale: "en", title, description: level.tagline, url: `/level/${level.id}` },
   };
@@ -33,6 +36,7 @@ export default async function LevelPage({ params }: { params: Promise<Params> })
   const level = getLevel((await params).level);
   if (!level) notFound();
   const url = absoluteUrl(`/level/${level.id}`);
+  const seo = pageSeo[`/level/${level.id}`];
   return (
     <div className="wrap narrow section">
       <JsonLd
@@ -73,7 +77,7 @@ export default async function LevelPage({ params }: { params: Promise<Params> })
         <MoonPhase level={level.id} size={48} />
         <h1>{level.name}</h1>
         <p className="level-tag">{level.tagline}</p>
-        <p>{level.description}</p>
+        <p>{seo?.answer ?? level.description}</p>
         <Constellation levelId={level.id} lessonKeys={level.lessons.map((l) => lessonKey(level.id, l.slug))} />
       </header>
       <LessonList level={level} />
@@ -88,6 +92,14 @@ export default async function LevelPage({ params }: { params: Promise<Params> })
         lessonKeys={level.lessons.map((l) => lessonKey(level.id, l.slug))}
         quizzes={allQuizzes.filter((q) => q.levelId === level.id)}
       />
+      {seo && (
+        <>
+          <h2 className="section-title" style={{ marginTop: 48 }}>
+            Questions about the {level.name.toLowerCase()} level
+          </h2>
+          <Faq faqs={seo.faqs} />
+        </>
+      )}
     </div>
   );
 }
