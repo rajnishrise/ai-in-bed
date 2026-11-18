@@ -1,22 +1,31 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Inter } from "next/font/google";
+import { Figtree, Fraunces, Newsreader } from "next/font/google";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { LogoMark, Wordmark } from "@/components/Logo";
 import { TabBar } from "@/components/NavLinks";
 import { JsonLd } from "@/components/JsonLd";
 import { InstallButton, ServiceWorker } from "@/components/Offline";
+import { WarmthToggle } from "@/components/WarmthToggle";
 import { organization, website } from "@/lib/schema";
 import { INSTAGRAM_URL, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const body = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" });
-const display = Instrument_Serif({
+// Night headings use Fraunces (soft, warm curves); morning headings and lesson text use Newsreader, a book serif.
+const body = Figtree({ subsets: ["latin"], variable: "--font-figtree", display: "swap" });
+const display = Fraunces({
   subsets: ["latin"],
-  weight: "400",
   style: ["normal", "italic"],
-  variable: "--font-display",
+  axes: ["opsz", "SOFT"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+const book = Newsreader({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
+  variable: "--font-newsreader",
   display: "swap",
 });
 
@@ -51,17 +60,18 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0f" },
-    { media: "(prefers-color-scheme: light)", color: "#f6f4ef" },
+    { media: "(prefers-color-scheme: dark)", color: "#140d0b" },
+    { media: "(prefers-color-scheme: light)", color: "#efe9df" },
   ],
 };
 
 // Applies the saved theme and reading mode before first paint so there is no flash.
-const themeScript = `try{var d=document.documentElement,t=localStorage.getItem('aib-theme');if(t)d.dataset.theme=t;if(localStorage.getItem('aib-reader')==='scroll')d.dataset.reader='scroll'}catch(e){}`;
+// Also turns on bedtime warmth between 9pm and 5am unless the reader switched it off.
+const themeScript = `try{var d=document.documentElement,t=localStorage.getItem('aib-theme');if(t)d.dataset.theme=t;if(localStorage.getItem('aib-reader')==='scroll')d.dataset.reader='scroll';var h=new Date().getHours();if((h>=21||h<5)&&localStorage.getItem('aib-warm')!=='off')d.dataset.warm='on'}catch(e){}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="night" className={`${body.variable} ${display.variable}`} suppressHydrationWarning>
+    <html lang="en" data-theme="night" className={`${body.variable} ${display.variable} ${book.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
@@ -81,6 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </Link>
               <p className="muted">{SITE_TAGLINE} Free, no sign-up. Your progress stays in your browser.</p>
               <InstallButton />
+              <WarmthToggle />
             </div>
             <nav className="footer-links" aria-label="Footer">
               <Link href="/level/beginner">Beginner</Link>

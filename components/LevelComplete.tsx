@@ -30,8 +30,8 @@ async function drawCard(canvas: HTMLCanvasElement, name: string, level: string, 
   const serif = css.getPropertyValue("--font-display").trim() || "Georgia";
   const sans = css.getPropertyValue("--font-body").trim() || "system-ui";
   const bg = c.createRadialGradient(W * 0.85, 0, 0, W * 0.85, 0, W * 1.1);
-  bg.addColorStop(0, "#2a2440");
-  bg.addColorStop(0.6, "#0a0a0f");
+  bg.addColorStop(0, "#4a2a1c");
+  bg.addColorStop(0.6, "#140d0b");
   c.fillStyle = bg;
   c.fillRect(0, 0, W, H);
   // stars
@@ -59,7 +59,7 @@ async function drawCard(canvas: HTMLCanvasElement, name: string, level: string, 
   c.stroke(new Path2D("M20.6 8.4 26.4 6.2M20.6 8.4 24.6 12.8M26.4 6.2 24.6 12.8"));
   c.restore();
 
-  c.fillStyle = "#e3c38f";
+  c.fillStyle = "#f4b46a";
   c.font = `600 30px ${sans}`;
   c.letterSpacing = "6px";
   c.fillText("LEVEL COMPLETE", 90, 620);
@@ -68,7 +68,7 @@ async function drawCard(canvas: HTMLCanvasElement, name: string, level: string, 
   c.font = `400 150px ${serif}`;
   c.fillText(level, 84, 770);
   c.font = `italic 400 64px ${serif}`;
-  c.fillStyle = "#e3c38f";
+  c.fillStyle = "#f4b46a";
   c.fillText("in AI, one night at a time", 90, 860);
   c.fillStyle = "#a9a7b6";
   c.font = `400 36px ${sans}`;
@@ -85,7 +85,7 @@ async function drawCard(canvas: HTMLCanvasElement, name: string, level: string, 
   c.fillText("AI ", 90, 1255);
   const w1 = c.measureText("AI ").width;
   c.font = `italic 400 52px ${serif}`;
-  c.fillStyle = "#e3c38f";
+  c.fillStyle = "#f4b46a";
   c.fillText("in", 90 + w1, 1255);
   const w2 = c.measureText("in").width;
   c.font = `400 52px ${serif}`;

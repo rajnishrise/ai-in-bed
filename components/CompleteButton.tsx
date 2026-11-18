@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Icon } from "./Icon";
 import { useProgress } from "./progress";
 
@@ -7,7 +8,12 @@ import { useProgress } from "./progress";
 export function CompleteButton({ lessonKey, subtle = false }: { lessonKey: string; subtle?: boolean }) {
   const { isDone, markDone, unmark } = useProgress();
   const done = isDone(lessonKey);
-  const toggle = () => (done ? unmark(lessonKey) : markDone(lessonKey));
+  const [glow, setGlow] = useState(false);
+  const toggle = () => {
+    if (done) return unmark(lessonKey);
+    markDone(lessonKey);
+    setGlow(true);
+  };
   if (subtle) {
     return (
       <button type="button" className="complete-subtle" onClick={toggle} aria-pressed={done}>
@@ -23,7 +29,8 @@ export function CompleteButton({ lessonKey, subtle = false }: { lessonKey: strin
   }
   return (
     <button
-      className={`btn ${done ? "btn-ghost" : "btn-primary"} btn-block`}
+      className={`btn ${done ? "btn-ghost" : "btn-primary"} btn-block ${glow ? "glow-up" : ""}`}
+      onAnimationEnd={() => setGlow(false)}
       onClick={toggle}
       aria-pressed={done}
     >

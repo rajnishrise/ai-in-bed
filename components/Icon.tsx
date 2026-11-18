@@ -27,6 +27,7 @@ const paths = {
   cloud: <><path d="M7 18.5a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.4 1.6A3.8 3.8 0 0 1 17.2 18.5H7Z" /><path d="M12 10.5v5.5M9.5 13.5 12 16l2.5-2.5" /></>,
   install: <><rect x="6.5" y="2.5" width="11" height="19" rx="2.2" /><path d="M12 7v7M9.5 11.5 12 14l2.5-2.5" /><path d="M10.5 18.5h3" /></>,
   edit: <><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4Z" /><path d="m13.5 6.5 4 4" /></>,
+  instagram: <><rect x="3.5" y="3.5" width="17" height="17" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="0.6" /></>,
   home: <><path d="M4 10.5 12 4l8 6.5V20h-5.5v-6h-5v6H4v-9.5Z" /></>,
 } as const;
 

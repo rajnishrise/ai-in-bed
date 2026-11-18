@@ -6,7 +6,7 @@ import { resources } from "@/content/resources";
 import { Icon, type IconName } from "@/components/Icon";
 import { JsonLd } from "@/components/JsonLd";
 import { LevelMeter } from "@/components/LevelMeter";
-import { LogoMark } from "@/components/Logo";
+import { HeroMoon } from "@/components/HeroMoon";
 import { MoonPhase } from "@/components/MoonPhase";
 import { Tonight } from "@/components/Tonight";
 import { TrackGrid } from "@/components/TrackGrid";
@@ -77,9 +77,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <div className="hero-art" aria-hidden>
-            <LogoMark size={260} />
-          </div>
+          <HeroMoon />
         </div>
         <div className="wrap">
           <ul className="stats">
