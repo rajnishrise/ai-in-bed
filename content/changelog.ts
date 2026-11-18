@@ -8,6 +8,16 @@ export type Release = {
 
 export const releases: Release[] = [
   {
+    date: "2026-11-18",
+    title: "A new blog: AI explained simply",
+    notes: [
+      "Eight plain-English guides to the questions people ask most: how ChatGPT works, AI vs machine learning vs deep learning, how to learn AI for free, generative AI, why AI hallucinates, prompting, whether you need maths, and AI agents.",
+      "Each post starts with a short answer, links the free lessons that go deeper and the sources it draws on, and lets you tap any AI term for a definition.",
+      "Glossary pages now point to the blog posts that explain each term, and there's an RSS feed for new posts.",
+    ],
+    lessons: [],
+  },
+  {
     date: "2026-10-26",
     title: "A 30-day plan, a page for every AI term and free certificates",
     notes: [

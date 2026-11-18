@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { lessonKey, levels } from "@/content";
+import { posts } from "@/content/blog";
 import { glossary } from "@/content/glossary";
 import { tracks } from "@/content/tracks";
 import { termSlug } from "@/lib/glossary";
@@ -13,6 +14,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/"), lastModified: updated, changeFrequency: "weekly", priority: 1 },
     { url: absoluteUrl("/free-ai-courses"), lastModified: updated, changeFrequency: "monthly", priority: 0.9 },
     { url: absoluteUrl("/free-ai-courses-with-certificates"), lastModified: updated, changeFrequency: "monthly", priority: 0.9 },
+    { url: absoluteUrl("/blog"), lastModified: new Date(posts.map((p) => p.updated ?? p.published).sort().at(-1)!), changeFrequency: "weekly", priority: 0.9 },
+    ...posts.map((p) => ({
+      url: absoluteUrl(`/blog/${p.slug}`),
+      lastModified: new Date(p.updated ?? p.published),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
     { url: absoluteUrl("/learn-ai-in-30-days"), lastModified: updated, changeFrequency: "monthly", priority: 0.9 },
     ...levels.map((l) => ({
       url: absoluteUrl(`/level/${l.id}`),

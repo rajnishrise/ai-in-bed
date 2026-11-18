@@ -6,6 +6,7 @@ import { termExamples } from "@/content/glossary-examples";
 import { Faq } from "@/components/Faq";
 import { Icon } from "@/components/Icon";
 import { JsonLd } from "@/components/JsonLd";
+import { blogPath, postsForTerm } from "@/lib/blog";
 import { getTerm, lessonsForTerm, relatedTerms, termInSentence, termSlug } from "@/lib/glossary";
 import { lastUpdated, publisher } from "@/lib/schema";
 import { SITE_NAME, absoluteUrl } from "@/lib/site";
@@ -39,6 +40,7 @@ export default async function TermPage({ params }: { params: Promise<Params> }) 
   const example = termExamples[term.term];
   const lessons = lessonsForTerm(term);
   const related = relatedTerms(term);
+  const reading = postsForTerm(term);
   const i = sorted.indexOf(term);
   const prev = sorted[(i - 1 + sorted.length) % sorted.length];
   const next = sorted[(i + 1) % sorted.length];
@@ -121,6 +123,24 @@ export default async function TermPage({ params }: { params: Promise<Params> }) 
                   <span className="muted">
                     {level.name} · {lesson.minutes} min
                   </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      {reading.length > 0 && (
+        <>
+          <h2 className="section-title" style={{ marginTop: 40 }}>
+            Read more on the blog
+          </h2>
+          <ul className="link-list">
+            {reading.map((p) => (
+              <li key={p.slug}>
+                <Link href={blogPath(p)}>
+                  <span>{p.title}</span>
+                  <span className="muted">{p.topic}</span>
                 </Link>
               </li>
             ))}

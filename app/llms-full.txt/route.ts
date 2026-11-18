@@ -1,4 +1,6 @@
+import { sortedPosts } from "@/content/blog";
 import { glossary } from "@/content/glossary";
+import { postMarkdown } from "@/lib/blog";
 import { termExamples } from "@/content/glossary-examples";
 import { SITE_DESCRIPTION, SITE_NAME, absoluteUrl } from "@/lib/site";
 import { allLessonsMarkdown } from "@/lib/markdown";
@@ -12,6 +14,8 @@ export function GET() {
     `> ${SITE_DESCRIPTION}`,
     `Source: ${absoluteUrl("/")}. Lessons are original summaries; each links the free and open material it builds on.`,
     allLessonsMarkdown(),
+    "---\n\n# Blog: common AI questions, answered",
+    sortedPosts.map(postMarkdown).join("\n\n---\n\n"),
     "---\n\n## AI glossary",
     [...glossary]
       .sort((a, b) => a.term.localeCompare(b.term))

@@ -1,4 +1,5 @@
 import { levels } from "@/content";
+import { postText, posts } from "@/content/blog";
 import { glossary } from "@/content/glossary";
 import { resources } from "@/content/resources";
 import { termSlug } from "@/lib/glossary";
@@ -32,6 +33,16 @@ export function GET() {
       meta: "Glossary",
       text: t.def,
       hay: `${t.term} ${t.def}`.toLowerCase(),
+    });
+  }
+  for (const p of posts) {
+    items.push({
+      kind: "Blog",
+      title: p.title,
+      href: `/blog/${p.slug}`,
+      meta: `Blog · ${p.topic}`,
+      text: p.description,
+      hay: `${p.title} ${p.seoTitle} ${postText(p)}`.toLowerCase(),
     });
   }
   for (const r of resources) {
