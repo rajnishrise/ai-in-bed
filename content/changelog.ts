@@ -8,6 +8,15 @@ export type Release = {
 
 export const releases: Release[] = [
   {
+    date: "2026-11-25",
+    title: "Eight more blog guides: RAG, tokens, transformers and more",
+    notes: [
+      "New plain-English guides: what RAG is, fine-tuning vs RAG vs prompt engineering (with LoRA), what tokens and context windows are, embeddings, how neural networks work, transformers and attention, how to run an LLM on your own laptop, and how to become an AI engineer.",
+      "Each one starts with a short answer, links the lessons and glossary terms that go deeper, and answers the most common follow-up questions.",
+    ],
+    lessons: [],
+  },
+  {
     date: "2026-11-18",
     title: "A new blog: AI explained simply",
     notes: [
