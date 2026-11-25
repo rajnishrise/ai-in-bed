@@ -23,7 +23,15 @@ export function postTerms(p: BlogPost): Term[] {
 }
 
 /** Posts that mention a glossary term, for "read more" links on term pages. */
-export const postsForTerm = (t: Term, limit = 3) => posts.filter((p) => postTerms(p).includes(t)).slice(0, limit);
+export const postsForTerm = (t: Term, limit = 3) => {
+  // A post about the term (it's in the title) comes before posts that only mention it.
+  const name = t.term.toLowerCase().replace(/\s*\(.*?\)/g, "").split(" / ")[0];
+  const about = (p: (typeof posts)[number]) => `${p.title} ${p.seoTitle}`.toLowerCase().includes(name);
+  return posts
+    .filter((p) => postTerms(p).includes(t))
+    .sort((a, b) => Number(about(b)) - Number(about(a)))
+    .slice(0, limit);
+};
 
 /** Posts that point at a lesson. */
 export const postsForLesson = (key: string, limit = 3) => posts.filter((p) => p.lessons.includes(key)).slice(0, limit);

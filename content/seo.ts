@@ -143,6 +143,8 @@ export const popularGuides: { href: string; title: string; note: string }[] = [
   { href: "/tracks/ai-for-everyone", title: "AI for everyone: no coding needed", note: "Track" },
   { href: "/learn/beginner/meet-llms", title: "What is an LLM? How ChatGPT works", note: "Beginner" },
   { href: "/learn/beginner/prompting-well", title: "How to write good AI prompts", note: "Beginner" },
+  { href: "/blog/what-is-rag", title: "What is RAG? Retrieval-augmented generation", note: "Blog" },
+  { href: "/blog/how-to-run-an-llm-locally", title: "How to run an LLM on your laptop", note: "Blog" },
   { href: "/learn/intermediate/open-models", title: "Open-weight models: run AI yourself", note: "Intermediate" },
   { href: "/learn/advanced/training-llms", title: "How LLMs are trained", note: "Advanced" },
   { href: "/learn/advanced/efficient-finetuning", title: "LoRA and quantisation explained", note: "Advanced" },

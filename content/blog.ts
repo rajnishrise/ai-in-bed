@@ -7,6 +7,8 @@
  * a highlighted note ({ tip }). Lessons are "level/slug" keys.
  */
 
+import { morePosts } from "./blog-more";
+
 export type BlogBlock = string | string[] | { ol: string[] } | { tip: string };
 
 export type BlogSection = { heading: string; blocks: BlogBlock[] };
@@ -53,7 +55,7 @@ export const posts: BlogPost[] = [
         heading: "It predicts the next word, very well",
         blocks: [
           "Type \"The capital of France is\" and ask what comes next. Almost anyone says \"Paris\". ChatGPT does something similar. It reads your text and works out how likely every possible next piece of text is, then picks one. Then it does it again, with that new piece added, until the answer is done.",
-          "Those pieces are called **tokens**. A token is often a whole short word, sometimes part of a longer one: \"unbelievable\" might be split into \"un\", \"believ\" and \"able\". You can see how this works in the lesson on [tokenisation](/learn/intermediate/tokenisation).",
+          "Those pieces are called **tokens**. A token is often a whole short word, sometimes part of a longer one: \"unbelievable\" might be split into \"un\", \"believ\" and \"able\". You can see how this works in the lesson on [tokenisation](/learn/intermediate/tokenisation), or read [what tokens are and how many words a token is](/blog/what-are-tokens-in-ai).",
           "The model doesn't always take the single most likely token. A setting called [temperature](/glossary/temperature) adds a little randomness, which is why you can ask the same question twice and get two different answers.",
           { tip: "Predicting the next word sounds simple. Doing it well across every topic means the model has to pick up grammar, facts, styles and a lot of reasoning patterns along the way." },
         ],
@@ -81,7 +83,7 @@ export const posts: BlogPost[] = [
         heading: "The transformer: how it keeps track of meaning",
         blocks: [
           "The \"T\" in GPT stands for **transformer**, a design introduced by Google researchers in the 2017 paper \"Attention Is All You Need\". Its key idea is [attention](/glossary/attention): when the model looks at a word, it can weigh every other word in the text to work out what that word means here.",
-          "In \"The cat sat on the mat because it was tired\", attention helps the model link \"it\" to \"the cat\", not \"the mat\". Stack dozens of these attention layers and the model can follow long, complicated text. The [transformers lesson](/learn/advanced/transformers) walks through it with pictures.",
+          "In \"The cat sat on the mat because it was tired\", attention helps the model link \"it\" to \"the cat\", not \"the mat\". Stack dozens of these attention layers and the model can follow long, complicated text. The [transformers lesson](/learn/advanced/transformers) walks through it with pictures, and our guide to [transformers and attention](/blog/what-is-a-transformer) explains it step by step.",
         ],
       },
       {
@@ -190,7 +192,7 @@ export const posts: BlogPost[] = [
       {
         heading: "Deep learning: neural networks with many layers",
         blocks: [
-          "[Deep learning](/glossary/deep-learning) uses [neural networks](/learn/beginner/neural-networks-gently): layers of simple maths units loosely inspired by brain cells. \"Deep\" just means many layers. Early layers pick up simple patterns, like edges in a photo; later layers combine them into ears, faces and whole scenes.",
+          "[Deep learning](/glossary/deep-learning) uses [neural networks](/learn/beginner/neural-networks-gently): layers of simple maths units loosely inspired by brain cells. \"Deep\" just means many layers. Early layers pick up simple patterns, like edges in a photo; later layers combine them into ears, faces and whole scenes. More in [how neural networks work](/blog/how-do-neural-networks-work).",
           "Neural networks are old, but they needed lots of data and computing power. Around 2012, a network called AlexNet, trained on graphics chips, won the ImageNet image-recognition contest by a wide margin. Since then deep learning has driven most AI breakthroughs: speech recognition, translation, self-driving research and chatbots.",
         ],
       },
@@ -310,7 +312,7 @@ export const posts: BlogPost[] = [
           "Courses give you knowledge; projects make it stick and show others what you can do. Good first projects are small and personal:",
           [
             "A classifier that sorts your own photos or emails.",
-            "A chatbot that answers questions about a document you care about, using [RAG](/glossary/rag).",
+            "A chatbot that answers questions about a document you care about, using [RAG](/blog/what-is-rag).",
             "A Kaggle competition entry, even if it ranks low.",
           ],
           "Share your work on GitHub with a short write-up of what you tried and what went wrong.",
@@ -520,7 +522,7 @@ export const posts: BlogPost[] = [
         blocks: [
           {
             ol: [
-              "**Give it the source.** Paste the document or data and ask it to answer only from that. This is the idea behind [RAG](/glossary/rag), retrieval-augmented generation, which you can try in the [RAG and agents lesson](/learn/advanced/rag-and-agents).",
+              "**Give it the source.** Paste the document or data and ask it to answer only from that. This is the idea behind [RAG](/blog/what-is-rag), retrieval-augmented generation, which you can try in the [RAG and agents lesson](/learn/advanced/rag-and-agents).",
               "**Ask for quotes and links.** Ask it to quote the exact passage it used. Then open the link or find the quote yourself.",
               "**Give it permission not to know.** Add \"If you're not sure, say so\" to your prompt.",
               "**Turn on search for current facts.** A tool that searches the web and shows its sources is far safer for recent events.",
@@ -707,7 +709,7 @@ export const posts: BlogPost[] = [
         blocks: [
           [
             "**Understand and use AI.** No maths or code. You need clear explanations and practice. This is where most people should start, and where our [Beginner level](/level/beginner) lives.",
-            "**Build with AI.** Using AI services in apps, or fine-tuning existing models: you need Python and a light touch of maths.",
+            "**Build with AI.** Using AI services in apps, or fine-tuning existing models: you need Python and a light touch of maths. See [how to become an AI engineer](/blog/how-to-become-an-ai-engineer).",
             "**Build models from scratch or do research.** You need solid maths, mostly linear algebra, calculus and probability, plus strong programming.",
           ],
         ],
@@ -717,7 +719,7 @@ export const posts: BlogPost[] = [
         blocks: [
           "Here's what each area does inside an AI model, which makes it much easier to learn:",
           [
-            "**Linear algebra: vectors and matrices.** AI stores words, images and users as lists of numbers called vectors. Similar things get similar vectors: that's an [embedding](/learn/intermediate/embeddings). A neural network layer is mostly multiplying a vector by a matrix.",
+            "**Linear algebra: vectors and matrices.** AI stores words, images and users as lists of numbers called vectors. Similar things get similar vectors: that's an [embedding](/blog/what-are-embeddings). A neural network layer is mostly multiplying a vector by a matrix.",
             "**Calculus: derivatives.** Training means repeatedly adjusting a model to make its errors smaller. A derivative says which way to adjust each number, and [gradient descent](/learn/intermediate/gradient-descent) follows it downhill. [Backpropagation](/learn/intermediate/backpropagation) is the chain rule applied efficiently.",
             "**Probability: uncertainty.** A chatbot chooses each next word from a probability distribution. Probability also explains [temperature](/glossary/temperature) and why models can be confidently wrong.",
             "**Statistics: measuring.** Judging whether a model is good, avoiding [overfitting](/learn/intermediate/overfitting), and understanding [precision](/glossary/precision) and [recall](/glossary/recall) all rely on statistics.",
@@ -831,7 +833,7 @@ export const posts: BlogPost[] = [
           [
             "**Search and browsing:** find and read current information.",
             "**Code:** run calculations, analyse data, test software.",
-            "**Files and documents:** read your reports, spreadsheets or a company knowledge base, often through [RAG](/glossary/rag).",
+            "**Files and documents:** read your reports, spreadsheets or a company knowledge base, often through [RAG](/blog/what-is-rag).",
             "**Apps:** calendars, email, shops, project trackers, through their APIs.",
             "**The computer itself:** some agents can look at a screen and click and type like a person.",
           ],
@@ -895,6 +897,7 @@ export const posts: BlogPost[] = [
       { title: "Model Context Protocol", url: "https://modelcontextprotocol.io/", by: "Open standard" },
     ],
   },
+  ...morePosts,
 ];
 
 export const getPost = (slug: string) => posts.find((p) => p.slug === slug);
