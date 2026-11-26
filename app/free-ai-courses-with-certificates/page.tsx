@@ -5,7 +5,7 @@ import { certificateFaqs } from "@/content/faq";
 import { Faq } from "@/components/Faq";
 import { Icon } from "@/components/Icon";
 import { JsonLd } from "@/components/JsonLd";
-import { lastUpdated, publisher } from "@/lib/schema";
+import { contentDates, lastUpdated, publisher } from "@/lib/schema";
 import { SITE_NAME, absoluteUrl } from "@/lib/site";
 
 const year = lastUpdated.slice(0, 4);
@@ -34,7 +34,7 @@ export default function CertificatesPage() {
               description,
               url,
               datePublished: "2026-10-26",
-              dateModified: lastUpdated,
+              dateModified: contentDates.certificates,
               author: publisher,
               publisher,
               inLanguage: "en",

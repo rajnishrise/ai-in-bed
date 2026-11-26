@@ -13,7 +13,7 @@ import { glossaryMotifs } from "@/content/visuals";
 import { JsonLd } from "@/components/JsonLd";
 import { blogPath, postsForTerm } from "@/lib/blog";
 import { getTerm, lessonsForTerm, relatedTerms, termInSentence, termSlug } from "@/lib/glossary";
-import { lastUpdated, publisher } from "@/lib/schema";
+import { publisher, termModified } from "@/lib/schema";
 import { SITE_NAME, absoluteUrl } from "@/lib/site";
 
 type Params = { term: string };
@@ -87,7 +87,7 @@ export default async function TermPage({ params }: { params: Promise<Params> }) 
               url,
               name: seo?.h1 ?? `What is ${name}?`,
               about: { "@id": url },
-              dateModified: lastUpdated,
+              dateModified: termModified(term.term),
               publisher,
               speakable: { "@type": "SpeakableSpecification", cssSelector: [".term-answer", ".term-example"] },
             },
