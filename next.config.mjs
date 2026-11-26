@@ -8,6 +8,7 @@ const nextConfig = {
       beforeFiles: [
         { source: "/learn/:level/:slug.md", destination: "/md/:level/:slug" },
         { source: "/blog/:slug.md", destination: "/blog-md/:slug" },
+        { source: "/everyday-ai/:slug.md", destination: "/everyday-md/:slug" },
       ],
     };
   },

@@ -8,6 +8,15 @@ export type Release = {
 
 export const releases: Release[] = [
   {
+    date: "2026-11-26",
+    title: "Everyday AI: the best tools for every job",
+    notes: [
+      "A new Everyday AI section with twelve practical guides: making videos, editing photos, generating images, writing, email, presentations, research, spreadsheets, meeting notes and transcription, music and audio, building apps without coding, and studying.",
+      "Each guide names the best tools for the job (free and open-source picks clearly marked), a simple workflow, prompts you can copy, and what to watch out for.",
+    ],
+    lessons: [],
+  },
+  {
     date: "2026-11-25",
     title: "Eight more blog guides: RAG, tokens, transformers and more",
     notes: [

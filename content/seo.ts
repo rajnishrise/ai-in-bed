@@ -140,6 +140,7 @@ export const pageSeo: Record<string, PageSeo> = {
 /** Pages to link from the home page, blog and glossary, so Google sees them as important. */
 export const popularGuides: { href: string; title: string; note: string }[] = [
   { href: "/learn-ai-in-30-days", title: "Learn AI in 30 days", note: "Free plan" },
+  { href: "/everyday-ai", title: "The best AI tools for everyday work", note: "Guides" },
   { href: "/tracks/ai-for-everyone", title: "AI for everyone: no coding needed", note: "Track" },
   { href: "/learn/beginner/meet-llms", title: "What is an LLM? How ChatGPT works", note: "Beginner" },
   { href: "/learn/beginner/prompting-well", title: "How to write good AI prompts", note: "Beginner" },

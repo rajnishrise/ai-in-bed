@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { lessonKey, levels } from "@/content";
 import { posts } from "@/content/blog";
+import { everydayGuides } from "@/content/everyday";
 import { glossary } from "@/content/glossary";
 import { resourceGuides } from "@/content/resource-guides";
 import { tracks } from "@/content/tracks";
@@ -19,6 +20,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...posts.map((p) => ({
       url: absoluteUrl(`/blog/${p.slug}`),
       lastModified: new Date(p.updated ?? p.published),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+    { url: absoluteUrl("/everyday-ai"), lastModified: new Date(everydayGuides.map((g) => g.updated ?? g.published).sort().at(-1)!), changeFrequency: "weekly", priority: 0.9 },
+    ...everydayGuides.map((g) => ({
+      url: absoluteUrl(`/everyday-ai/${g.slug}`),
+      lastModified: new Date(g.updated ?? g.published),
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
