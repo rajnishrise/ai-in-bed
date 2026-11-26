@@ -94,6 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <WarmthToggle />
             </div>
             <nav className="footer-links" aria-label="Footer">
+              <Link href="/learn">Learn</Link>
               <Link href="/level/beginner">Beginner</Link>
               <Link href="/level/intermediate">Intermediate</Link>
               <Link href="/level/advanced">Advanced</Link>
@@ -107,6 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/blog">Blog</Link>
               <Link href="/everyday-ai">Everyday AI</Link>
               <Link href="/new">What&apos;s new</Link>
+              <Link href="/about">About</Link>
               <Link href="/contribute">Contribute</Link>
               <a href={INSTAGRAM_URL} rel="me noopener" target="_blank">
                 Instagram

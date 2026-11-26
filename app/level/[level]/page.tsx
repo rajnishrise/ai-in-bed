@@ -60,7 +60,8 @@ export default async function LevelPage({ params }: { params: Promise<Params> })
               "@type": "BreadcrumbList",
               itemListElement: [
                 { "@type": "ListItem", position: 1, name: SITE_NAME, item: absoluteUrl("/") },
-                { "@type": "ListItem", position: 2, name: level.name, item: url },
+                { "@type": "ListItem", position: 2, name: "Learn", item: absoluteUrl("/learn") },
+                { "@type": "ListItem", position: 3, name: level.name, item: url },
               ],
             },
           ],

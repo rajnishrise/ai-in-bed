@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs } from "@/lib/schema";
 import { TrackGrid } from "@/components/TrackGrid";
 
 export const metadata: Metadata = {
@@ -10,6 +12,7 @@ export const metadata: Metadata = {
 export default function TracksPage() {
   return (
     <div className="wrap section">
+      <JsonLd data={{ "@context": "https://schema.org", ...breadcrumbs(["Tracks", "/tracks"]) }} />
       <p className="kicker">Tracks</p>
       <h1>Pick a path for your goal</h1>
       <p className="lead" style={{ maxWidth: "36rem" }}>

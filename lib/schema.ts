@@ -83,6 +83,7 @@ export const contentDates = {
   certificates: "2026-10-26",
   plan: "2026-10-26",
   contribute: "2026-10-16",
+  about: "2026-11-26",
 };
 
 const newest = (...dates: (string | undefined)[]) => dates.filter(Boolean).sort().at(-1)!;
@@ -109,6 +110,19 @@ export function faqPage(faqs: { q: string; a: string }[]) {
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
+/** A BreadcrumbList from the home page down. Pass [name, path] pairs after Home. */
+export function breadcrumbs(...trail: [name: string, path: string][]) {
+  return {
+    "@type": "BreadcrumbList",
+    itemListElement: [[SITE_NAME, "/"] as [string, string], ...trail].map(([name, path], i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name,
+      item: absoluteUrl(path),
     })),
   };
 }

@@ -5,6 +5,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { PopularGuides } from "@/components/PopularGuides";
 import { termSlug } from "@/lib/glossary";
 import { absoluteUrl } from "@/lib/site";
+import { breadcrumbs } from "@/lib/schema";
+
 
 export const metadata: Metadata = {
   title: `AI Glossary: ${glossary.length} AI and Machine Learning Terms Explained Simply`,
@@ -20,6 +22,9 @@ export default function GlossaryPage() {
       <JsonLd
         data={{
           "@context": "https://schema.org",
+          "@graph": [
+            breadcrumbs(["Glossary", "/glossary"]),
+            {
           "@type": "DefinedTermSet",
           "@id": absoluteUrl("/glossary"),
           name: "AI glossary in plain English",
@@ -31,6 +36,8 @@ export default function GlossaryPage() {
             url: absoluteUrl(`/glossary/${termSlug(t.term)}`),
             inDefinedTermSet: absoluteUrl("/glossary"),
           })),
+            },
+          ],
         }}
       />
       <p className="kicker">Glossary</p>

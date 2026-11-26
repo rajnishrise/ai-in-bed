@@ -6,7 +6,7 @@ import { Icon, type IconName } from "./Icon";
 
 const items: { href: string; label: string; icon: IconName; match: string[] }[] = [
   { href: "/", label: "Home", icon: "home", match: ["/"] },
-  { href: "/level/beginner", label: "Learn", icon: "layers", match: ["/level", "/learn"] },
+  { href: "/learn", label: "Learn", icon: "layers", match: ["/level", "/learn"] },
   { href: "/tracks", label: "Tracks", icon: "route", match: ["/tracks"] },
   { href: "/review", label: "Review", icon: "repeat", match: ["/review"] },
   { href: "/resources", label: "Library", icon: "book", match: ["/resources"] },

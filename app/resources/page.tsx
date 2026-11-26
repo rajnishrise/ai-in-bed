@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { resources } from "@/content/resources";
 import { resourceGuides } from "@/content/resource-guides";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs } from "@/lib/schema";
 import { LibraryBrowser } from "@/components/LibraryBrowser";
 
 export const metadata: Metadata = {
@@ -13,6 +15,7 @@ export const metadata: Metadata = {
 export default function ResourcesPage() {
   return (
     <div className="wrap narrow section">
+      <JsonLd data={{ "@context": "https://schema.org", ...breadcrumbs(["Library", "/resources"]) }} />
       <p className="kicker">Library</p>
       <h1>The best free AI material, in one place</h1>
       <p className="lead">

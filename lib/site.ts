@@ -6,8 +6,8 @@ export const SITE_TAGLINE = "Understand AI, one quiet night at a time.";
 export const SITE_DESCRIPTION =
   "A free AI course in ten-minute lessons, from beginner to advanced. Learn AI online with visual explainers, quizzes and the best open courses from Stanford, Google and fast.ai. No sign-up.";
 
-/** The home page's search title: what people type, then the brand. */
-export const HOME_TITLE = "Free AI Course: Learn AI in 10-Minute Lessons · AI in Bed";
+/** The home page's search title: the brand first, so searches for the name find it, then what people type. */
+export const HOME_TITLE = "AI in Bed: Free AI Course in 10-Minute Lessons";
 
 /**
  * The canonical origin: https://www.aiinbed.com. NEXT_PUBLIC_SITE_URL overrides it;
