@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { postMinutes, sortedPosts } from "@/content/blog";
 import { Icon } from "@/components/Icon";
+import { ArtThumb } from "@/components/cardArt";
+import { pickMotif } from "@/components/cardArt/pick";
+import { blogVisuals } from "@/content/visuals";
 import { JsonLd } from "@/components/JsonLd";
 import { blogPath } from "@/lib/blog";
 import { publisher } from "@/lib/schema";
@@ -66,6 +69,7 @@ export default function BlogIndex() {
         {sortedPosts.map((p) => (
           <li key={p.slug}>
             <Link href={blogPath(p)} className="blog-card">
+              <ArtThumb motif={blogVisuals[p.slug]?.motifs[0] ?? pickMotif(`${p.title} ${p.answer}`)} seedKey={`blog/${p.slug}`} />
               <p className="pick-for">
                 {p.topic} · {postMinutes(p)} min read
               </p>

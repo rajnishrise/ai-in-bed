@@ -4,6 +4,8 @@ import { everydayGuides, everydayMinutes, freeToolCount, openToolCount } from "@
 import type { Faq as FaqItem } from "@/content/faq";
 import { Faq } from "@/components/Faq";
 import { Icon } from "@/components/Icon";
+import { ArtThumb } from "@/components/cardArt";
+import { everydayVisuals } from "@/content/visuals";
 import { JsonLd } from "@/components/JsonLd";
 import { EVERYDAY_PATH, everydayPath, toolHref } from "@/lib/everyday";
 import { publisher } from "@/lib/schema";
@@ -91,6 +93,7 @@ export default function EverydayIndex() {
         {everydayGuides.map((g) => (
           <li key={g.slug}>
             <Link href={everydayPath(g)} className="blog-card everyday-card">
+              <ArtThumb motif={everydayVisuals[g.slug]?.motifs[0] ?? "bulb"} seedKey={`everyday/${g.slug}`} />
               <p className="pick-for">
                 {g.topic} · {everydayMinutes(g)} min
               </p>

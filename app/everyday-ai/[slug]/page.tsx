@@ -8,6 +8,8 @@ import { Faq } from "@/components/Faq";
 import { Icon } from "@/components/Icon";
 import { JsonLd } from "@/components/JsonLd";
 import { ReadingBar } from "@/components/ReadingBar";
+import { HeroArt } from "@/components/cardArt";
+import { defaultVisual, everydayVisuals } from "@/content/visuals";
 import { blogPath } from "@/lib/blog";
 import { EVERYDAY_PATH, everydayPath, guideLessons, guidePosts, toolHref } from "@/lib/everyday";
 import { publisher } from "@/lib/schema";
@@ -66,6 +68,7 @@ export default async function EverydayGuidePage({ params }: { params: Promise<Pa
   const minutes = everydayMinutes(g);
   const modified = g.updated ?? g.published;
   const others = everydayGuides.filter((o) => o.slug !== g.slug);
+  const visual = everydayVisuals[g.slug] ?? defaultVisual(g.title, "bulb");
   // Tap-to-define marks the first mention of each glossary word across the page.
   const seen = new Set<string>();
   const t = (s: string) => <BlogText text={s} seen={seen} />;
@@ -152,6 +155,8 @@ export default async function EverydayGuidePage({ params }: { params: Promise<Pa
           <span aria-hidden>·</span> {g.tools.length} tools
         </p>
       </header>
+
+      <HeroArt motifs={visual.motifs} seedKey={`everyday/${g.slug}`} alt={visual.alt} />
 
       <section className="term-box" aria-label="Short answer">
         <p className="term-label">Short answer</p>
