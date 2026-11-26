@@ -15,6 +15,8 @@ export type TermSeo = {
   faqs: Faq[];
   /** A guide page that goes further. */
   guide?: { href: string; title: string };
+  /** When this entry was written or last changed, if after contentDates.glossarySeo in lib/schema.ts. */
+  updated?: string;
 };
 
 export const termSeo: Record<string, TermSeo> = {
@@ -102,5 +104,44 @@ export const termSeo: Record<string, TermSeo> = {
       { q: "Does quantisation make a model worse?", a: "A little. 8-bit is usually almost indistinguishable from the original; 4-bit loses a bit more but is often worth it to fit a much bigger model in the same memory." },
       { q: "What is a GGUF or 4-bit model?", a: "GGUF is a file format used by llama.cpp and tools like Ollama to share quantised models. A \"4-bit\" or \"Q4\" model stores most weights in 4 bits." },
     ],
+  },
+  Classification: {
+    title: "What Is Classification in Machine Learning? Simple Examples",
+    h1: "What is classification in machine learning?",
+    answer:
+      "Classification is a machine learning task where the model picks a category for each input: spam or not spam, cat or dog, fraud or normal. It learns from examples that already have the right label, then predicts the label for new ones it hasn't seen.",
+    faqs: [
+      { q: "What is the difference between classification and regression?", a: "Classification predicts a category (spam or not spam). Regression predicts a number (a house price, tomorrow's temperature). Both are supervised learning: the model learns from labelled examples." },
+      { q: "What are binary and multi-class classification?", a: "Binary classification has two possible answers, like yes or no. Multi-class has more than two, like sorting photos into cat, dog or bird. Multi-label lets one input have several labels at once, like tagging a photo with both \"beach\" and \"sunset\"." },
+      { q: "How do you measure a classifier?", a: "Start with accuracy (the share it gets right), then look at precision and recall, which matter when one class is rare, such as fraud. A confusion matrix shows exactly which classes get mixed up." },
+    ],
+    guide: { href: "/learn/intermediate/evaluating-models", title: "How to tell if a classifier is any good" },
+    updated: "2026-11-26",
+  },
+  Eval: {
+    title: "What Are AI Evals? How to Test an LLM App, Simply",
+    h1: "What is an eval in AI?",
+    answer:
+      "An eval (short for evaluation) is a repeatable test for an AI model or app: a set of example inputs plus a way to score each output, by exact match, a rule, a human or another model acting as a judge. Teams run evals before every change to see if the AI got better or worse.",
+    faqs: [
+      { q: "What is the difference between an eval and a benchmark?", a: "A benchmark is a public eval that everyone runs to compare models, like MMLU or SWE-bench. Your own evals test your app on your own tasks, which tells you far more about whether it works for your users." },
+      { q: "What is LLM-as-a-judge?", a: "Using a language model to grade another model's answers against a rubric. It's quick and cheap for things like tone or helpfulness, but you should spot-check its grades against a person's now and then." },
+      { q: "How many examples does an eval need?", a: "Start small: 20 to 50 real examples that cover your most common and most important cases catch most problems. Add a new example every time you find a failure, so it can't come back unnoticed." },
+    ],
+    guide: { href: "/learn/intermediate/testing-language-models", title: "Lesson: how to test a language model" },
+    updated: "2026-11-26",
+  },
+  "Learning rate": {
+    title: "What Is the Learning Rate in Machine Learning? Simply Explained",
+    h1: "What is the learning rate in machine learning?",
+    answer:
+      "The learning rate is the size of each step a model takes while training. After every batch, gradient descent works out which way to nudge the weights; the learning rate decides how far to nudge them. Too big and training overshoots and bounces around; too small and it crawls.",
+    faqs: [
+      { q: "What is a good learning rate?", a: "There's no single answer. Common starting points are 0.001 for the Adam optimiser and around 0.00002 (2e-5) for fine-tuning a large language model. Try a few values ten times apart and keep the one whose loss falls fastest without jumping around." },
+      { q: "What happens if the learning rate is too high?", a: "The loss jumps around or shoots up instead of falling, because each step overshoots the low point. In the worst case the numbers blow up and training fails." },
+      { q: "What is a learning rate schedule?", a: "Changing the learning rate during training: often a short warm-up from zero, then a slow decay. Big steps early make fast progress and small steps late let the model settle into a good spot." },
+    ],
+    guide: { href: "/learn/intermediate/gradient-descent", title: "Lesson: gradient descent, step by step" },
+    updated: "2026-11-26",
   },
 };

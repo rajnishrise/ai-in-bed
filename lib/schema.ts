@@ -1,4 +1,6 @@
 import { releases } from "@/content/changelog";
+import { termSeo } from "@/content/glossary-seo";
+import { pageSeo } from "@/content/seo";
 import { INSTAGRAM_URL, REPO_URL, SITE_ALT_NAMES, SITE_DESCRIPTION, SITE_NAME, absoluteUrl } from "@/lib/site";
 
 /** Shared schema.org pieces so every page describes the site the same way. */
@@ -60,6 +62,45 @@ export function lessonPublished(key: string) {
 
 /** The newest release date: the site's "last updated". */
 export const lastUpdated = releases[0].date;
+
+/*
+ * When each kind of page last really changed. Sitemap lastmod and schema dateModified use these
+ * instead of the newest release date: if every page claims to change on every release, Google
+ * stops trusting lastmod and has less reason to come back for pages it hasn't crawled yet.
+ * Bump the matching date when you edit that content.
+ */
+export const contentDates = {
+  /** Terms, definitions and examples (content/glossary*.ts). */
+  glossary: "2026-10-26",
+  /** Question titles and answers in content/glossary-seo.ts, unless an entry sets its own date. */
+  glossarySeo: "2026-11-18",
+  /** Search answers and FAQs in content/seo.ts. */
+  pageSeo: "2026-11-18",
+  tracks: "2026-10-16",
+  library: "2026-10-06",
+  libraryGuides: "2026-11-18",
+  freeCourses: "2026-10-26",
+  certificates: "2026-10-26",
+  plan: "2026-10-26",
+  contribute: "2026-10-16",
+};
+
+const newest = (...dates: (string | undefined)[]) => dates.filter(Boolean).sort().at(-1)!;
+
+/** A lesson changes when it's published and when its search answer (content/seo.ts) changes. */
+export function lessonModified(key: string) {
+  return newest(lessonPublished(key), pageSeo[`/learn/${key}`] && contentDates.pageSeo);
+}
+
+/** A level page changes when a lesson is added to it. */
+export function levelModified(levelId: string, lessonKeys: string[]) {
+  return newest(...lessonKeys.map(lessonPublished), pageSeo[`/level/${levelId}`] && contentDates.pageSeo);
+}
+
+export function termModified(term: string) {
+  const seo = termSeo[term];
+  return seo ? newest(contentDates.glossary, seo.updated ?? contentDates.glossarySeo) : contentDates.glossary;
+}
 
 export function faqPage(faqs: { q: string; a: string }[]) {
   return {

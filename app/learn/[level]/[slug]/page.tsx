@@ -22,8 +22,8 @@ import { Faq } from "@/components/Faq";
 import { pageSeo } from "@/content/seo";
 import { ReadingBar } from "@/components/ReadingBar";
 import { ReaderToggle, ReelChrome, SwipeHint } from "@/components/Reel";
-import { lessonTerms, termSlug } from "@/lib/glossary";
-import { lastUpdated, lessonPublished, publisher } from "@/lib/schema";
+import { lessonTerms, termSlug, relatedLessons } from "@/lib/glossary";
+import { lessonModified, lessonPublished, publisher } from "@/lib/schema";
 import { SITE_NAME, absoluteUrl, suggestEditUrl } from "@/lib/site";
 
 type Params = { level: string; slug: string };
@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       description: lesson.summary,
       url: path,
       publishedTime: lessonPublished(lessonKey(lv.id, lesson.slug)),
-      modifiedTime: lastUpdated,
+      modifiedTime: lessonModified(lessonKey(lv.id, lesson.slug)),
     },
   };
 }
@@ -183,6 +183,7 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
   const seo = pageSeo[`/learn/${level.id}/${lesson.slug}`];
   const slides = toSlides(lesson.blocks);
   const terms = lessonTerms(lesson).slice(0, 8);
+  const related = relatedLessons(lesson, [prev, next?.lesson].filter((l) => l !== undefined));
   const quizzes = lesson.blocks.filter((b) => b.kind === "quiz");
   let blockIndex = 0;
   const speech = [
@@ -207,7 +208,7 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
               educationalLevel: level.name,
               image: `${url}/opengraph-image`,
               datePublished: lessonPublished(key),
-              dateModified: lastUpdated,
+              dateModified: lessonModified(key),
               author: publisher,
               timeRequired: `PT${lesson.minutes}M`,
               isAccessibleForFree: true,
@@ -319,6 +320,23 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
                     <li key={t.term}>
                       <Link href={`/glossary/${termSlug(t.term)}`} className="pill">
                         {t.term}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+            {related.length > 0 && (
+              <section className="lesson-terms">
+                <h2>Keep exploring</h2>
+                <ul className="link-list">
+                  {related.map((r) => (
+                    <li key={`${r.level.id}/${r.lesson.slug}`}>
+                      <Link href={`/learn/${r.level.id}/${r.lesson.slug}`}>
+                        <span>{r.lesson.title}</span>
+                        <span className="muted">
+                          {r.level.name} · {r.lesson.minutes} min
+                        </span>
                       </Link>
                     </li>
                   ))}

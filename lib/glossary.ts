@@ -111,3 +111,41 @@ export function relatedTerms(term: Term, limit = 6): Term[] {
 
 /** A term as it reads mid-sentence: "Machine learning" becomes "machine learning"; LoRA and AI winter stay. */
 export const termInSentence = (term: string) => (/^[A-Z][a-z]+\b/.test(term) ? term[0].toLowerCase() + term.slice(1) : term);
+
+/**
+ * Lessons from any level that share the most key terms with this one, for the "Keep exploring"
+ * links under a lesson. Terms near the top of both lessons count most, so the links stay on topic.
+ */
+export function relatedLessons(lesson: Lesson, exclude: Lesson[] = [], limit = 3) {
+  const top = (l: Lesson) => lessonTerms(l).slice(0, 10);
+  const mine = top(lesson);
+  const all = levels.flatMap((level) => level.lessons.map((l) => ({ level, lesson: l })));
+  const key = all.find((x) => x.lesson === lesson);
+  const pinned = (key && relatedPins[`${key.level.id}/${lesson.slug}`]) ?? [];
+  return all
+    .filter((x) => x.lesson !== lesson && !exclude.includes(x.lesson))
+    .map((x) => {
+      const pin = pinned.indexOf(`${x.level.id}/${x.lesson.slug}`);
+      const theirs = top(x.lesson);
+      const score =
+        pin !== -1
+          ? 10_000 - pin
+          : mine.reduce((n, t, i) => {
+              const j = theirs.indexOf(t);
+              return j === -1 ? n : n + (10 - i) * (10 - j);
+            }, 0);
+      return { ...x, score };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit);
+}
+
+/** Hand-picked links for lessons about AI in everyday life, which use few glossary terms. */
+const relatedPins: Record<string, string[]> = {
+  "beginner/ai-and-jobs": ["beginner/ai-at-work", "beginner/everyday-ai", "beginner/using-ai-safely", "beginner/prompting-well"],
+  "beginner/spotting-ai-fakes": ["beginner/how-ai-makes-pictures", "beginner/using-ai-safely", "advanced/diffusion"],
+  "beginner/using-ai-safely": ["beginner/spotting-ai-fakes", "beginner/prompting-well", "beginner/ai-at-work"],
+  "beginner/ai-at-work": ["beginner/ai-and-jobs", "beginner/prompting-well", "beginner/using-ai-safely"],
+  "beginner/everyday-ai": ["beginner/ai-and-jobs", "beginner/how-ai-makes-pictures", "beginner/prompting-well"],
+};

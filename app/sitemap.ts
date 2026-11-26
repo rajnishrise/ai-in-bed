@@ -6,16 +6,25 @@ import { glossary } from "@/content/glossary";
 import { resourceGuides } from "@/content/resource-guides";
 import { tracks } from "@/content/tracks";
 import { termSlug } from "@/lib/glossary";
-import { lastUpdated, lessonPublished } from "@/lib/schema";
+import { contentDates, lastUpdated, lessonModified, levelModified, termModified } from "@/lib/schema";
 import { absoluteUrl } from "@/lib/site";
+import { pageSeo } from "@/content/seo";
+
+const pageSeoTracks = Object.fromEntries(
+  Object.keys(pageSeo)
+    .filter((p) => p.startsWith("/tracks/"))
+    .map((p) => [p.slice("/tracks/".length), true]),
+);
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Real dates, not the build time: search engines trust lastmod only when it changes with the content.
+  // Real dates, not the build time or the newest release: search engines trust lastmod only when it
+  // changes with the page's own content. See contentDates in lib/schema.ts.
   const updated = new Date(lastUpdated);
+  const d = (date: string) => new Date(date);
   return [
     { url: absoluteUrl("/"), lastModified: updated, changeFrequency: "weekly", priority: 1 },
-    { url: absoluteUrl("/free-ai-courses"), lastModified: updated, changeFrequency: "monthly", priority: 0.9 },
-    { url: absoluteUrl("/free-ai-courses-with-certificates"), lastModified: updated, changeFrequency: "monthly", priority: 0.9 },
+    { url: absoluteUrl("/free-ai-courses"), lastModified: d(contentDates.freeCourses), changeFrequency: "monthly", priority: 0.9 },
+    { url: absoluteUrl("/free-ai-courses-with-certificates"), lastModified: d(contentDates.certificates), changeFrequency: "monthly", priority: 0.9 },
     { url: absoluteUrl("/blog"), lastModified: new Date(posts.map((p) => p.updated ?? p.published).sort().at(-1)!), changeFrequency: "weekly", priority: 0.9 },
     ...posts.map((p) => ({
       url: absoluteUrl(`/blog/${p.slug}`),
@@ -30,43 +39,43 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
-    { url: absoluteUrl("/learn-ai-in-30-days"), lastModified: updated, changeFrequency: "monthly", priority: 0.9 },
+    { url: absoluteUrl("/learn-ai-in-30-days"), lastModified: d(contentDates.plan), changeFrequency: "monthly", priority: 0.9 },
     ...levels.map((l) => ({
       url: absoluteUrl(`/level/${l.id}`),
-      lastModified: updated,
+      lastModified: d(levelModified(l.id, l.lessons.map((s) => lessonKey(l.id, s.slug)))),
       changeFrequency: "weekly" as const,
       priority: 0.9,
     })),
     ...levels.flatMap((l) =>
       l.lessons.map((s) => ({
         url: absoluteUrl(`/learn/${l.id}/${s.slug}`),
-        lastModified: new Date(lessonPublished(lessonKey(l.id, s.slug))),
+        lastModified: d(lessonModified(lessonKey(l.id, s.slug))),
         changeFrequency: "monthly" as const,
         priority: 0.8,
       })),
     ),
-    { url: absoluteUrl("/tracks"), lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/tracks"), lastModified: d(contentDates.tracks), changeFrequency: "monthly", priority: 0.8 },
     ...tracks.map((t) => ({
       url: absoluteUrl(`/tracks/${t.id}`),
-      lastModified: updated,
+      lastModified: d(t.id in pageSeoTracks ? contentDates.pageSeo : contentDates.tracks),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
-    { url: absoluteUrl("/resources"), lastModified: updated, changeFrequency: "monthly", priority: 0.7 },
+    { url: absoluteUrl("/resources"), lastModified: d(contentDates.library), changeFrequency: "monthly", priority: 0.7 },
     ...resourceGuides.map((g) => ({
       url: absoluteUrl(`/resources/${g.slug}`),
-      lastModified: updated,
+      lastModified: d(contentDates.libraryGuides),
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
-    { url: absoluteUrl("/glossary"), lastModified: updated, changeFrequency: "monthly", priority: 0.6 },
+    { url: absoluteUrl("/glossary"), lastModified: d(contentDates.glossary), changeFrequency: "monthly", priority: 0.6 },
     ...glossary.map((t) => ({
       url: absoluteUrl(`/glossary/${termSlug(t.term)}`),
-      lastModified: updated,
+      lastModified: d(termModified(t.term)),
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
     { url: absoluteUrl("/new"), lastModified: updated, changeFrequency: "weekly", priority: 0.5 },
-    { url: absoluteUrl("/contribute"), lastModified: updated, changeFrequency: "yearly", priority: 0.4 },
+    { url: absoluteUrl("/contribute"), lastModified: d(contentDates.contribute), changeFrequency: "yearly", priority: 0.4 },
   ];
 }
