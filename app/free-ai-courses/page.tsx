@@ -6,7 +6,7 @@ import { resources, type Resource } from "@/content/resources";
 import { Faq } from "@/components/Faq";
 import { Icon } from "@/components/Icon";
 import { JsonLd } from "@/components/JsonLd";
-import { lastUpdated, publisher } from "@/lib/schema";
+import { contentDates, lastUpdated, publisher } from "@/lib/schema";
 import { SITE_NAME, absoluteUrl } from "@/lib/site";
 
 const year = lastUpdated.slice(0, 4);
@@ -70,8 +70,8 @@ export default function FreeAiCoursesPage() {
               headline: title,
               description,
               url,
-              datePublished: lastUpdated,
-              dateModified: lastUpdated,
+              datePublished: "2026-10-17",
+              dateModified: contentDates.freeCourses,
               author: publisher,
               publisher,
               inLanguage: "en",

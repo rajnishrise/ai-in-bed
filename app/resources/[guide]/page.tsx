@@ -6,7 +6,7 @@ import { resources } from "@/content/resources";
 import { Faq } from "@/components/Faq";
 import { Icon } from "@/components/Icon";
 import { JsonLd } from "@/components/JsonLd";
-import { lastUpdated, publisher } from "@/lib/schema";
+import { contentDates, lastUpdated, publisher } from "@/lib/schema";
 import { SITE_NAME, absoluteUrl } from "@/lib/site";
 
 type Params = { guide: string };
@@ -57,8 +57,8 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
               headline: g.h1,
               description: g.description,
               url,
-              datePublished: lastUpdated,
-              dateModified: lastUpdated,
+              datePublished: contentDates.libraryGuides,
+              dateModified: contentDates.libraryGuides,
               author: publisher,
               publisher,
               inLanguage: "en",
