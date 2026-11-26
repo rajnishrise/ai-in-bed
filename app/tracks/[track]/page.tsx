@@ -7,7 +7,7 @@ import { TrackPath } from "@/components/TrackPath";
 import { getTrack, trackLessons, tracks } from "@/content/tracks";
 import { Faq } from "@/components/Faq";
 import { pageSeo } from "@/content/seo";
-import { courseDetails } from "@/lib/schema";
+import { breadcrumbs, courseDetails } from "@/lib/schema";
 import { absoluteUrl } from "@/lib/site";
 
 type Params = { track: string };
@@ -37,12 +37,17 @@ export default async function TrackPage({ params }: { params: Promise<Params> })
       <JsonLd
         data={{
           "@context": "https://schema.org",
+          "@graph": [
+            breadcrumbs(["Tracks", "/tracks"], [t.name, `/tracks/${t.id}`]),
+            {
           "@type": "Course",
           name: `${t.name} (AI in Bed track)`,
           description: t.description,
           url: absoluteUrl(`/tracks/${t.id}`),
           ...courseDetails(steps.reduce((n, s) => n + s.lesson.minutes, 0)),
           hasPart: steps.map((s) => ({ "@type": "LearningResource", name: s.lesson.title, url: absoluteUrl(s.href) })),
+            },
+          ],
         }}
       />
       <nav className="level-switch" aria-label="Tracks">

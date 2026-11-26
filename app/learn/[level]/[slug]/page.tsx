@@ -251,8 +251,9 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
               "@type": "BreadcrumbList",
               itemListElement: [
                 { "@type": "ListItem", position: 1, name: SITE_NAME, item: absoluteUrl("/") },
-                { "@type": "ListItem", position: 2, name: level.name, item: absoluteUrl(`/level/${level.id}`) },
-                { "@type": "ListItem", position: 3, name: lesson.title, item: url },
+                { "@type": "ListItem", position: 2, name: "Learn", item: absoluteUrl("/learn") },
+                { "@type": "ListItem", position: 3, name: level.name, item: absoluteUrl(`/level/${level.id}`) },
+                { "@type": "ListItem", position: 4, name: lesson.title, item: url },
               ],
             },
           ],
@@ -265,6 +266,8 @@ export default async function LessonPage({ params }: { params: Promise<Params> }
         <section className="slide slide-intro">
           <div className="slide-inner">
             <nav className="crumbs" aria-label="Breadcrumb">
+              <Link href="/learn">Learn</Link>
+              <span aria-hidden> / </span>
               <Link href={`/level/${level.id}`}>{level.name}</Link>
               <span aria-hidden> / </span>
               <span aria-current="page">

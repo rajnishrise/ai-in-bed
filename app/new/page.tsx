@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getLesson } from "@/content";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs } from "@/lib/schema";
 import { releases } from "@/content/changelog";
 
 export const metadata: Metadata = {
@@ -14,6 +16,7 @@ const fmt = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-GB"
 export default function WhatsNewPage() {
   return (
     <div className="wrap narrow section">
+      <JsonLd data={{ "@context": "https://schema.org", ...breadcrumbs(["What's new", "/new"]) }} />
       <p className="kicker">Changelog</p>
       <h1>What&apos;s new</h1>
       <p className="lead">New lessons and features, newest first.</p>

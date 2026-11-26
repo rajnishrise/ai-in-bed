@@ -1,5 +1,20 @@
 # Status
 
+## Earn Google sitelinks (2026-11-26, branch claude/project-thread-aj0cch)
+
+**Goal:** sitelinks under the AI in Bed result. Google only shows them on a #1 brand result, so the real target is ranking #1 for "ai in bed".
+
+**Already in place before this:** Organization (logo, sameAs Instagram + GitHub), WebSite with alternate names, header sections, breadcrumbs on lessons/levels/blog/glossary terms/guides.
+
+**Done in this branch:**
+- BreadcrumbList on /tracks, each track, /resources, /glossary, /new (helper `breadcrumbs()` in lib/schema.ts)
+- Draft, pending owner OK: /learn hub (all levels + every lesson) and Learn nav link pointing to it; level and lesson breadcrumbs now Home > Learn > Level; /about page (AboutPage schema tied to the Organization); home title brand-first ("AI in Bed: Free AI Course in 10-Minute Lessons"); both pages in sitemap and footer
+- Build passes; markup checked on a local build
+
+**Needs owner:** pick option on the decision card (full / pages only / markup only), then merge.
+
+**Open to-dos (off-site, owner):** link aiinbed.com from Instagram bio and GitHub repo "website" field; backlinks; GSC Request indexing for /learn and /about after deploy.
+
 ## Get unindexed pages into Google (2026-11-26)
 
 **Problem:** Search Console lists 11 URLs as "Discovered - currently not indexed" (never crawled).

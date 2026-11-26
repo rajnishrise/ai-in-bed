@@ -54,6 +54,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
       })),
     ),
+    { url: absoluteUrl("/learn"), lastModified: updated, changeFrequency: "weekly", priority: 0.9 },
+    { url: absoluteUrl("/about"), lastModified: d(contentDates.about), changeFrequency: "yearly", priority: 0.5 },
     { url: absoluteUrl("/tracks"), lastModified: d(contentDates.tracks), changeFrequency: "monthly", priority: 0.8 },
     ...tracks.map((t) => ({
       url: absoluteUrl(`/tracks/${t.id}`),
