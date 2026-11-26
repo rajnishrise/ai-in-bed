@@ -8,10 +8,10 @@
 
 **Done in this branch:**
 - BreadcrumbList on /tracks, each track, /resources, /glossary, /new (helper `breadcrumbs()` in lib/schema.ts)
-- Draft, pending owner OK: /learn hub (all levels + every lesson) and Learn nav link pointing to it; level and lesson breadcrumbs now Home > Learn > Level; /about page (AboutPage schema tied to the Organization); home title brand-first ("AI in Bed: Free AI Course in 10-Minute Lessons"); both pages in sitemap and footer
+- Owner picked full option A on 2026-11-26 (brand-first title + hubs): /learn hub (all levels + every lesson) and Learn nav link pointing to it; level and lesson breadcrumbs now Home > Learn > Level; /about page (AboutPage schema tied to the Organization); home title brand-first ("AI in Bed: Free AI Course in 10-Minute Lessons"); both pages in sitemap and footer
 - Build passes; markup checked on a local build
 
-**Needs owner:** pick option on the decision card (full / pages only / markup only), then merge.
+**Needs owner:** merge PR #12.
 
 **Open to-dos (off-site, owner):** link aiinbed.com from Instagram bio and GitHub repo "website" field; backlinks; GSC Request indexing for /learn and /about after deploy.
 
