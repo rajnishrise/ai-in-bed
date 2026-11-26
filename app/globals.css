@@ -4026,3 +4026,6 @@ html[data-warm="on"][data-theme="morning"] body::before {
   .art-thumb { width: 60px; height: 60px; padding: 9px; margin-left: 14px; }
 }
 .blog-figure { margin: 26px 0 8px; }
+:root[data-theme="morning"] .page-art { background: radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, var(--art) 7%, transparent), transparent 70%), linear-gradient(180deg, var(--bg-2), var(--surface)); }
+:root[data-theme="morning"] .page-art .ca-sky ellipse { opacity: 0.6; }
+.page-art-compact .ha-main { height: 82%; }

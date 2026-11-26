@@ -1,6 +1,6 @@
 # Status: images and graphics (branch claude/project-thread-klfd2l)
 
-Draft only. Waiting for the owner to choose a direction before the final build and PR.
+Owner picked Option A (original illustrations) on 2026-11-26. Final version is in the PR; waiting for review and merge.
 
 ## Done
 - Option A draft: original line illustrations (own SVG, no third-party licences)
@@ -11,12 +11,13 @@ Draft only. Waiting for the owner to choose a direction before the final build a
   - Alt text on every picture; 6 new motifs (film, envelope, slides, grid, note, pen)
 - Checked night + morning themes, desktop + phone; build and type check pass
 
+- Quality pass: hand-picked picture for all 72 glossary terms, magic-wand motif for image tools, softer morning glow
+
 ## Needs owner
-- Pick a direction (A illustrations, B A plus a few public-domain history photos, C photo-led)
+- Review and merge the PR
 
 ## Open to-dos
-- Option B only: download public-domain photos (cloud can't reach Wikimedia; needs a folder on the owner's computer) and add a credits section
-- Open the PR after the pick
+- Later, if wanted: a few public-domain history photos (Option B)
 
 ## Assumptions
 - "Open-source images" can include original SVG released with the site

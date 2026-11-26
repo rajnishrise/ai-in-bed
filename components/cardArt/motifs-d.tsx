@@ -58,6 +58,18 @@ export const motifsD: Record<string, Motif> = {
       <circle className="a-fi" cx="88" cy="40" r="1.5" />
     </>
   ),
+  wand: () => (
+    <>
+      <circle className="a-sg" cx="66" cy="34" r="16" />
+      <path className="a-ln" d="M18 84 L58 44" style={{ strokeWidth: 4 }} />
+      <path className="a-ac" d="M50 52 L58 44" style={{ strokeWidth: 4 }} />
+      <path className="a-fg" d="M66 18 Q68 32 82 34 Q68 36 66 50 Q64 36 50 34 Q64 32 66 18 Z" />
+      <path className="a-fa" d="M84 54 Q85 60 91 61 Q85 62 84 68 Q83 62 77 61 Q83 60 84 54 Z" />
+      <path className="a-gd thin" d="M40 18 v8 M36 22 h8" />
+      <circle className="a-fi" cx="88" cy="16" r="1.5" />
+      <circle className="a-fa" cx="30" cy="40" r="1.8" />
+    </>
+  ),
   pen: () => (
     <>
       <path className="a-sf" d="M66 14 L84 32 L42 74 L20 80 L26 58 Z" />

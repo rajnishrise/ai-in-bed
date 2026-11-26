@@ -9,6 +9,7 @@ import { Faq } from "@/components/Faq";
 import { Icon } from "@/components/Icon";
 import { HeroArt } from "@/components/cardArt";
 import { pickMotif } from "@/components/cardArt/pick";
+import { glossaryMotifs } from "@/content/visuals";
 import { JsonLd } from "@/components/JsonLd";
 import { blogPath, postsForTerm } from "@/lib/blog";
 import { getTerm, lessonsForTerm, relatedTerms, termInSentence, termSlug } from "@/lib/glossary";
@@ -110,7 +111,7 @@ export default async function TermPage({ params }: { params: Promise<Params> }) 
       <h1>{seo?.h1 ?? `What is ${name}?`}</h1>
       <HeroArt
         size="compact"
-        motifs={[pickMotif(`${term.term} ${term.term} ${answer}`)]}
+        motifs={[glossaryMotifs[termSlug(term.term)] ?? pickMotif(`${term.term} ${term.term} ${answer}`)]}
         seedKey={`glossary/${term.term}`}
         alt={`Small line illustration for the AI term ${term.term}.`}
       />
