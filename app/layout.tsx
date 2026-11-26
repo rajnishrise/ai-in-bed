@@ -105,6 +105,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/resources">Library</Link>
               <Link href="/glossary">Glossary</Link>
               <Link href="/blog">Blog</Link>
+              <Link href="/everyday-ai">Everyday AI</Link>
               <Link href="/new">What&apos;s new</Link>
               <Link href="/contribute">Contribute</Link>
               <a href={INSTAGRAM_URL} rel="me noopener" target="_blank">

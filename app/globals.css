@@ -3789,3 +3789,190 @@ html[data-warm="on"][data-theme="morning"] body::before {
   font-size: 1.1rem;
   margin-bottom: 8px;
 }
+
+/* ---------- Everyday AI guides ---------- */
+.everyday-hub .narrow-head {
+  max-width: 700px;
+}
+
+.everyday-grid {
+  list-style: none;
+  padding: 0;
+  margin: 36px 0 0;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+}
+
+.everyday-grid > li {
+  display: flex;
+}
+
+.everyday-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.everyday-card h2 {
+  font-size: 1.45rem;
+}
+
+.everyday-card .text-link {
+  margin-top: auto;
+}
+
+.everyday-counts {
+  margin: 0 0 14px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.quick-picks {
+  min-width: 0;
+}
+
+.quick-picks td a {
+  color: var(--ink);
+}
+
+.tool-picks {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 0;
+  display: grid;
+  gap: 12px;
+}
+
+.tool-pick h3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.tool-pick h3 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.tool-pick h3 a:hover {
+  color: var(--gold);
+}
+
+.tool-by {
+  color: var(--ink);
+  opacity: 0.85;
+}
+
+.cost {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.cost-open-source,
+.cost-open-weights {
+  color: var(--on-solid);
+  background: var(--c3);
+  border-color: transparent;
+}
+
+.cost-free {
+  color: var(--c3);
+  border-color: color-mix(in srgb, var(--c3) 55%, transparent);
+}
+
+.cost-free-plan {
+  color: var(--gold);
+  border-color: color-mix(in srgb, var(--gold) 45%, transparent);
+}
+
+:root[data-theme="morning"] .cost-open-source,
+:root[data-theme="morning"] .cost-open-weights {
+  color: #fff;
+}
+
+.blog-post ol.workflow {
+  padding-left: 1.4em;
+}
+
+.workflow li {
+  margin-bottom: 0.7em;
+}
+
+.prompt-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.prompt-card {
+  margin: 0;
+  padding: 16px 18px 18px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.prompt-card figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.prompt-card blockquote {
+  margin: 0;
+  font-family: var(--font-reading), Georgia, serif;
+  color: var(--reading-ink, var(--ink));
+  line-height: 1.55;
+}
+
+.prompt-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.prompt-copy:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.watch-out ul {
+  margin: 0;
+  padding-left: 1.1em;
+}
+
+.watch-out li {
+  margin-bottom: 0.45em;
+}
+
+.watch-out li:last-child {
+  margin-bottom: 0;
+}
+
+:root[data-theme="morning"] .prompt-card,
+:root[data-theme="morning"] .everyday-card {
+  border-radius: 8px;
+}

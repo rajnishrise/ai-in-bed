@@ -1,6 +1,8 @@
 import { sortedPosts } from "@/content/blog";
+import { everydayGuides } from "@/content/everyday";
 import { glossary } from "@/content/glossary";
 import { postMarkdown } from "@/lib/blog";
+import { guideMarkdown } from "@/lib/everyday";
 import { termExamples } from "@/content/glossary-examples";
 import { SITE_DESCRIPTION, SITE_NAME, absoluteUrl } from "@/lib/site";
 import { allLessonsMarkdown } from "@/lib/markdown";
@@ -16,6 +18,8 @@ export function GET() {
     allLessonsMarkdown(),
     "---\n\n# Blog: common AI questions, answered",
     sortedPosts.map(postMarkdown).join("\n\n---\n\n"),
+    "---\n\n# Everyday AI: the best tools for each job",
+    everydayGuides.map(guideMarkdown).join("\n\n---\n\n"),
     "---\n\n## AI glossary",
     [...glossary]
       .sort((a, b) => a.term.localeCompare(b.term))

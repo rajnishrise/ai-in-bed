@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { sortedPosts } from "@/content/blog";
+import { everydayGuides } from "@/content/everyday";
 import { lessonRefs, levels, totalGraphics, totalLessons, totalQuizzes } from "@/content";
 import { resources } from "@/content/resources";
 import { Icon, type IconName } from "@/components/Icon";
@@ -162,6 +163,24 @@ export default function Home() {
             The best free AI courses, compared <Icon name="arrow" size={16} />
           </Link>
         </div>
+      </section>
+
+      <section className="wrap section">
+        <p className="kicker">Everyday AI</p>
+        <h2 className="section-title">Use AI for everyday work</h2>
+        <ul className="link-list home-blog">
+          {everydayGuides.slice(0, 6).map((g) => (
+            <li key={g.slug}>
+              <Link href={`/everyday-ai/${g.slug}`}>
+                <span>{g.title}</span>
+                <span className="muted">{g.topic}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <Link href="/everyday-ai" className="text-link" style={{ marginTop: 18, display: "inline-flex" }}>
+          All {everydayGuides.length} guides, with free and open-source tools <Icon name="arrow" size={16} />
+        </Link>
       </section>
 
       <section className="wrap section">

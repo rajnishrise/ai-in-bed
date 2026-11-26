@@ -1,5 +1,6 @@
 import { levels, totalLessons } from "@/content";
 import { sortedPosts } from "@/content/blog";
+import { everydayGuides } from "@/content/everyday";
 import { glossary } from "@/content/glossary";
 import { resources } from "@/content/resources";
 import { resourceGuides } from "@/content/resource-guides";
@@ -40,6 +41,10 @@ export function GET() {
     "",
     "## Blog: common AI questions, answered",
     ...sortedPosts.map((p) => `- [${p.title}](${absoluteUrl(`/blog/${p.slug}.md`)}): ${p.answer}`),
+    "",
+    "## Everyday AI: the best tools for each job, free and open-source first",
+    `- [Everyday AI guides](${absoluteUrl("/everyday-ai")}): practical guides to using AI for everyday work, with a free and open-source pick for each job.`,
+    ...everydayGuides.map((g) => `- [${g.title}](${absoluteUrl(`/everyday-ai/${g.slug}.md`)}): ${g.answer}`),
     "",
     "## AI glossary: what each term means",
     ...[...glossary]

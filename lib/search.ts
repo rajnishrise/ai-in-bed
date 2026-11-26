@@ -1,5 +1,5 @@
 export type SearchItem = {
-  kind: "Lesson" | "Glossary" | "Blog" | "Library";
+  kind: "Lesson" | "Glossary" | "Blog" | "Guide" | "Library";
   title: string;
   href: string;
   external?: boolean;
@@ -13,7 +13,7 @@ export type SearchItem = {
 export function searchItems(items: SearchItem[], q: string, limit = 24): SearchItem[] {
   const words = q.toLowerCase().split(/\s+/).filter(Boolean);
   if (!words.length) return [];
-  const kindRank = { Lesson: 0, Glossary: 1, Blog: 1, Library: 2 } as const;
+  const kindRank = { Lesson: 0, Glossary: 1, Blog: 1, Guide: 1, Library: 2 } as const;
   return items
     .filter((it) => words.every((w) => it.hay.includes(w)))
     .map((it) => {

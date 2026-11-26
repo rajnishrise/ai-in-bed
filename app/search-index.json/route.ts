@@ -1,5 +1,6 @@
 import { levels } from "@/content";
 import { postText, posts } from "@/content/blog";
+import { everydayGuides, everydayText } from "@/content/everyday";
 import { glossary } from "@/content/glossary";
 import { resources } from "@/content/resources";
 import { termSlug } from "@/lib/glossary";
@@ -43,6 +44,16 @@ export function GET() {
       meta: `Blog · ${p.topic}`,
       text: p.description,
       hay: `${p.title} ${p.seoTitle} ${postText(p)}`.toLowerCase(),
+    });
+  }
+  for (const g of everydayGuides) {
+    items.push({
+      kind: "Guide",
+      title: g.title,
+      href: `/everyday-ai/${g.slug}`,
+      meta: `Everyday AI · ${g.topic}`,
+      text: g.card,
+      hay: `${g.seoTitle} ${everydayText(g)}`.toLowerCase(),
     });
   }
   for (const r of resources) {
