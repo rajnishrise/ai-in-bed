@@ -7,6 +7,9 @@ import { termSeo } from "@/content/glossary-seo";
 import { PopularGuides } from "@/components/PopularGuides";
 import { Faq } from "@/components/Faq";
 import { Icon } from "@/components/Icon";
+import { HeroArt } from "@/components/cardArt";
+import { pickMotif } from "@/components/cardArt/pick";
+import { glossaryMotifs } from "@/content/visuals";
 import { JsonLd } from "@/components/JsonLd";
 import { blogPath, postsForTerm } from "@/lib/blog";
 import { getTerm, lessonsForTerm, relatedTerms, termInSentence, termSlug } from "@/lib/glossary";
@@ -106,6 +109,12 @@ export default async function TermPage({ params }: { params: Promise<Params> }) 
       </nav>
       <p className="kicker">AI glossary</p>
       <h1>{seo?.h1 ?? `What is ${name}?`}</h1>
+      <HeroArt
+        size="compact"
+        motifs={[glossaryMotifs[termSlug(term.term)] ?? pickMotif(`${term.term} ${term.term} ${answer}`)]}
+        seedKey={`glossary/${term.term}`}
+        alt={`Small line illustration for the AI term ${term.term}.`}
+      />
       <section className="term-box" aria-label="Short answer">
         <p className="term-label">Short answer</p>
         <p className="term-answer">{answer}</p>

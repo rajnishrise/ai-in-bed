@@ -8,6 +8,10 @@ import { PopularGuides } from "@/components/PopularGuides";
 import { Icon } from "@/components/Icon";
 import { JsonLd } from "@/components/JsonLd";
 import { ReadingBar } from "@/components/ReadingBar";
+import { HeroArt } from "@/components/cardArt";
+import { pickMotif } from "@/components/cardArt/pick";
+import { Graphic } from "@/components/graphics";
+import { blogVisuals, defaultVisual } from "@/content/visuals";
 import { blogPath, postLessons, postTerms, relatedPosts } from "@/lib/blog";
 import { getTerm, termSlug } from "@/lib/glossary";
 import { publisher } from "@/lib/schema";
@@ -84,6 +88,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
   const more = relatedPosts(post);
   const minutes = postMinutes(post);
   const modified = post.updated ?? post.published;
+  const visual = blogVisuals[post.slug] ?? defaultVisual(post.title, pickMotif(`${post.title} ${post.answer}`));
 
   // Terms the text already links to don't also need a tap-to-define.
   const allText = [post.answer, ...post.sections.flatMap((s) => s.blocks.flatMap((b) => (typeof b === "string" ? [b] : Array.isArray(b) ? b : "ol" in b ? b.ol : [b.tip])))].join(" ");
@@ -153,6 +158,8 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
         </p>
       </header>
 
+      <HeroArt motifs={visual.motifs} seedKey={`blog/${post.slug}`} alt={visual.alt} />
+
       <section className="term-box" aria-label="Short answer">
         <p className="term-label">Short answer</p>
         <p className="term-answer">
@@ -171,12 +178,18 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
         </ul>
       </nav>
 
-      {post.sections.map((s) => (
+      {post.sections.map((s, si) => (
         <section key={s.heading} className="blog-section">
           <h2 id={termSlug(s.heading)}>{s.heading}</h2>
           {s.blocks.map((b, i) => (
             <Block key={i} b={b} seen={seen} />
           ))}
+          {si === 0 && visual.figure && (
+            <figure className="figure blog-figure">
+              <Graphic id={visual.figure.graphic} />
+              <figcaption>{visual.figure.caption}</figcaption>
+            </figure>
+          )}
         </section>
       ))}
 
