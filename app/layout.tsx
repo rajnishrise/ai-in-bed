@@ -67,6 +67,9 @@ export const viewport: Viewport = {
 
 // Applies the saved theme and reading mode before first paint so there is no flash.
 // Also turns on bedtime warmth between 9pm and 5am unless the reader switched it off.
+// AdSense publisher ID; public by design (it also appears in /ads.txt).
+const ADSENSE_CLIENT = "ca-pub-7026554161534274";
+
 const themeScript = `try{var d=document.documentElement,t=localStorage.getItem('aib-theme');if(t)d.dataset.theme=t;if(localStorage.getItem('aib-reader')==='scroll')d.dataset.reader='scroll';var h=new Date().getHours();if((h>=21||h<5)&&localStorage.getItem('aib-warm')!=='off')d.dataset.warm='on'}catch(e){}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -74,6 +77,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" data-theme="night" className={`${body.variable} ${display.variable} ${book.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Google AdSense site verification. No ad units or Auto ads are turned on yet. */}
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+          crossOrigin="anonymous"
+        />
       </head>
       <body>
         <JsonLd data={{ "@context": "https://schema.org", "@graph": [organization, website] }} />
