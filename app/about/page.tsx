@@ -51,7 +51,7 @@ export default function AboutPage() {
       <h1>About AI in Bed</h1>
       <p className="lead">
         AI in Bed is a free website for learning artificial intelligence in calm, ten-minute lessons, made to be read on
-        a phone before you sleep. No sign-up, no ads, no paywall.
+        a phone before you sleep. No sign-up, no paywall, and no ads in lessons.
       </p>
 
       <h2 className="section-title" style={{ marginTop: 36 }}>

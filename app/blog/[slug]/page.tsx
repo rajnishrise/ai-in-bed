@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AdSlot } from "@/components/AdSlot";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { type BlogBlock, getPost, postMinutes, postText, posts } from "@/content/blog";
@@ -190,6 +191,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
               <figcaption>{visual.figure.caption}</figcaption>
             </figure>
           )}
+          {si === 0 && <AdSlot placement="inContent" />}
         </section>
       ))}
 
@@ -201,6 +203,8 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
           ))}
         </ul>
       </section>
+
+      <AdSlot placement="endOfPage" />
 
       <h2 className="section-title" style={{ marginTop: 44 }}>
         Learn it properly, free

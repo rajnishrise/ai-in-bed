@@ -1,16 +1,16 @@
 # Status
 
-## AdSense (2026-11-27, branch claude/project-thread-u79a38)
+## AdSense (2026-11-28, branch claude/project-thread-u79a38)
 
-**Goal:** get www.aiinbed.com approved for AdSense. Scope now is verification only.
+**Goal:** run AdSense on www.aiinbed.com without hurting the reading experience.
 
-**Done in this branch:** AdSense script (ca-pub-7026554161534274) in `<head>` of every page via app/layout.tsx; public/ads.txt. Build passes; checked locally that the script is in the served HTML on home, blog, lesson and glossary pages and /ads.txt serves. Service worker skips cross-origin requests and there is no CSP, so nothing blocks it.
+**Done:** PR #13 merged 2026-11-28: AdSense script in every page head + /ads.txt; AdSense shows site ownership verified.
 
-**Decisions:** no ad units and no Auto ads yet; placement is the owner's call (options offered: Auto ads, manual slots on blog/guides/glossary only, or none on lessons).
+**In this branch (PR #14):** `AdSlot` component (components/AdSlot.tsx, IDs in lib/ads.ts): 2 manual slots on blog posts, Everyday AI guides and glossary terms (after the opening part, near the end), with reserved height and an "Advertisement" label; hides when unfilled. /privacy page (AdSense, Vercel Analytics, local storage) linked in footer and sitemap. "No ads" copy changed to "no ads in lessons" (About, FAQ, llms.txt). Build passes; screenshots in project files ai-in-bed-previews/ads/.
 
-**Needs owner:** merge the PR, then click Verify in AdSense. Before ads show: turn on Google's consent message (Privacy & messaging, EEA/UK/Swiss) and add a privacy policy page (site has none yet).
+**Decisions:** owner picked manual slots with lessons ad-free on 2026-11-28 (calm lessons, swipe cards stay intact). No Auto ads.
 
-**Note:** the Oct 2026 monetization plan listed display ads under "skip"; owner is choosing to try them.
+**Needs owner:** create 2 display ad units in AdSense (Ads > By ad unit) and share their slot IDs; slots stay hidden until set. Turn on Google's consent message (Privacy & messaging, EEA/UK/CH). Merge PR.
 
 ## Earn Google sitelinks (2026-11-26, branch claude/project-thread-aj0cch)
 

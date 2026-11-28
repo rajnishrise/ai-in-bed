@@ -4029,3 +4029,27 @@ html[data-warm="on"][data-theme="morning"] body::before {
 :root[data-theme="morning"] .page-art { background: radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, var(--art) 7%, transparent), transparent 70%), linear-gradient(180deg, var(--bg-2), var(--surface)); }
 :root[data-theme="morning"] .page-art .ca-sky ellipse { opacity: 0.6; }
 .page-art-compact .ha-main { height: 82%; }
+
+/* Ad slots (blog, Everyday AI, glossary only). Reserved height stops the page jumping when an ad loads. */
+.ad-slot {
+  margin: 36px 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  min-height: 300px;
+}
+.ad-slot .ad-label {
+  margin: 0 0 8px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ad-slot:has(ins[data-ad-status="unfilled"]) {
+  display: none;
+}
+@media (min-width: 720px) {
+  .ad-slot { min-height: 280px; }
+}
+@media print {
+  .ad-slot { display: none; }
+}

@@ -9,7 +9,7 @@ const hours = Math.round(totalMinutes / 60);
 export const homeFaqs: Faq[] = [
   {
     q: "Is AI in Bed really a free AI course?",
-    a: `Yes. All ${totalLessons} lessons, quizzes, interactive explainers and learning tracks are free, with no sign-up, no paywall and no ads. Your progress is saved in your own browser.`,
+    a: `Yes. All ${totalLessons} lessons, quizzes, interactive explainers and learning tracks are free, with no sign-up, no paywall and no ads in lessons. A few ads on blog, guide and glossary pages help pay for the site. Your progress is saved in your own browser.`,
   },
   {
     q: "Who is this AI course for?",
