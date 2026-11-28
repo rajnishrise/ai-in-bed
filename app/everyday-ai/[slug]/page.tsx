@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AdSlot } from "@/components/AdSlot";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { costLabel, everydayGuides, everydayMinutes, everydayText, getEverydayGuide } from "@/content/everyday";
@@ -186,6 +187,8 @@ export default async function EverydayGuidePage({ params }: { params: Promise<Pa
         </ul>
       </section>
 
+      <AdSlot placement="inContent" />
+
       <section className="blog-section">
         <h2 id="best-tools">The best tools</h2>
         <p className="muted small">
@@ -256,6 +259,8 @@ export default async function EverydayGuidePage({ params }: { params: Promise<Pa
           </ul>
         </aside>
       </section>
+
+      <AdSlot placement="endOfPage" />
 
       <h2 className="section-title" style={{ marginTop: 44 }}>
         Understand how it works, free

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AdSlot } from "@/components/AdSlot";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { glossary } from "@/content/glossary";
@@ -134,6 +135,8 @@ export default async function TermPage({ params }: { params: Promise<Params> }) 
         </p>
       )}
 
+      <AdSlot placement="inContent" />
+
       {lessons.length > 0 && (
         <>
           <h2 className="section-title" style={{ marginTop: 40 }}>
@@ -193,6 +196,8 @@ export default async function TermPage({ params }: { params: Promise<Params> }) 
         Questions
       </h2>
       <Faq faqs={faqs} />
+
+      <AdSlot placement="endOfPage" />
 
       <div style={{ marginTop: 40 }}>
         <PopularGuides title="Start learning AI, free" limit={5} />
