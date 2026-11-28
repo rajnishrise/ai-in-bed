@@ -10,9 +10,9 @@
 
 **Decisions:** owner picked manual slots with lessons ad-free on 2026-11-28 (calm lessons, swipe cards stay intact). No Auto ads.
 
-**PR #14 merged 2026-11-28.** "In content" unit ID 8996610389 set in lib/ads.ts (PR #15).
+**PR #14 merged 2026-11-28.** Ad unit IDs set in lib/ads.ts (PR #15): In content 8996610389, End of page 2658432741. Merge after AdSense approval to avoid empty slots.
 
-**Needs owner:** "End of page" ad unit ID (slot stays hidden until set); turn on Google's consent message (Privacy & messaging, EEA/UK/CH). AdSense site review requested 2026-11-27.
+**Needs owner:** merge PR #15 after approval; turn on Google's consent message (Privacy & messaging, EEA/UK/CH). AdSense site review requested 2026-11-27.
 
 ## Earn Google sitelinks (2026-11-26, branch claude/project-thread-aj0cch)
 

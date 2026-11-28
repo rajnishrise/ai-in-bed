@@ -9,7 +9,7 @@ export const AD_SLOTS = {
   /** After the opening section of a page. */
   inContent: "8996610389",
   /** Near the end of a page, after the main content. */
-  endOfPage: "",
+  endOfPage: "2658432741",
 } as const;
 
 export type AdPlacement = keyof typeof AD_SLOTS;
