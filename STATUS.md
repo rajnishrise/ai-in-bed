@@ -10,7 +10,9 @@
 
 **Decisions:** owner picked manual slots with lessons ad-free on 2026-11-28 (calm lessons, swipe cards stay intact). No Auto ads.
 
-**Needs owner:** create 2 display ad units in AdSense (Ads > By ad unit) and share their slot IDs; slots stay hidden until set. Turn on Google's consent message (Privacy & messaging, EEA/UK/CH). Merge PR.
+**PR #14 merged 2026-11-28.** "In content" unit ID 8996610389 set in lib/ads.ts (PR #15).
+
+**Needs owner:** "End of page" ad unit ID (slot stays hidden until set); turn on Google's consent message (Privacy & messaging, EEA/UK/CH). AdSense site review requested 2026-11-27.
 
 ## Earn Google sitelinks (2026-11-26, branch claude/project-thread-aj0cch)
 
