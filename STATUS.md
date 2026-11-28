@@ -1,5 +1,17 @@
 # Status
 
+## AdSense (2026-11-27, branch claude/project-thread-u79a38)
+
+**Goal:** get www.aiinbed.com approved for AdSense. Scope now is verification only.
+
+**Done in this branch:** AdSense script (ca-pub-7026554161534274) in `<head>` of every page via app/layout.tsx; public/ads.txt. Build passes; checked locally that the script is in the served HTML on home, blog, lesson and glossary pages and /ads.txt serves. Service worker skips cross-origin requests and there is no CSP, so nothing blocks it.
+
+**Decisions:** no ad units and no Auto ads yet; placement is the owner's call (options offered: Auto ads, manual slots on blog/guides/glossary only, or none on lessons).
+
+**Needs owner:** merge the PR, then click Verify in AdSense. Before ads show: turn on Google's consent message (Privacy & messaging, EEA/UK/Swiss) and add a privacy policy page (site has none yet).
+
+**Note:** the Oct 2026 monetization plan listed display ads under "skip"; owner is choosing to try them.
+
 ## Earn Google sitelinks (2026-11-26, branch claude/project-thread-aj0cch)
 
 **Goal:** sitelinks under the AI in Bed result. Google only shows them on a #1 brand result, so the real target is ranking #1 for "ai in bed".
